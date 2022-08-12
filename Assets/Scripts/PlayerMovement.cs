@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movement;
     private SpriteRenderer sprite;
 
+    
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
