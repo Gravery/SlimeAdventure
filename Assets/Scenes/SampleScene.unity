@@ -636,6 +636,7 @@ GameObject:
   - component: {fileID: 1479946742}
   - component: {fileID: 1479946750}
   - component: {fileID: 1479946751}
+  - component: {fileID: 1479946752}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Player
@@ -669,6 +670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  standardSlime: {fileID: 21300000, guid: 195a3d7a7b633624aae9e8576fcd3e59, type: 3}
+  upSlime: {fileID: 21300000, guid: 86e90fc20a7427b429ce88f138b2f7c7, type: 3}
 --- !u!114 &1479946744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,6 +831,20 @@ MonoBehaviour:
   isDashing: 0
   startCooldown: 0.8
   onCooldown: 0
+--- !u!114 &1479946752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479946741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20949a9c537b4bd4cbb70241349f214f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeAttack: 32
+  attackSpeed: 100
 --- !u!1 &1936737458
 GameObject:
   m_ObjectHideFlags: 0

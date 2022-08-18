@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 6f;
-    
+    public Sprite standardSlime;
+    public Sprite upSlime;
     private Rigidbody2D _rigidbody2D;
     private Vector2 _movement;
     private SpriteRenderer sprite;
@@ -20,14 +21,20 @@ public class PlayerMovement : MonoBehaviour
     {
         //float deltaTime = Time.deltaTime;
         float horizontal = Input.GetAxisRaw("Horizontal");  //* deltaTime;
+        GetComponent<SpriteRenderer>().sprite = standardSlime;
         Flip(horizontal);
         float vertical = Input.GetAxisRaw("Vertical");  //* deltaTime;
+        if (vertical > 0){
+            GetComponent<SpriteRenderer>().sprite = upSlime;
+        }
         _movement = new Vector2(horizontal, vertical);
-    }
-    
-    private void FixedUpdate()
-    {
-        _rigidbody2D.velocity = _movement * speed;
+        if (Input.GetKeyUp(KeyCode.Space)){
+            print("Do nothing");
+        }
+        else{
+           _rigidbody2D.velocity = _movement * speed;
+            
+        }
     }
 
     private void Flip(float horizontal)
