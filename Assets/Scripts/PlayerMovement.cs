@@ -24,20 +24,22 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = standardSlime;
         Flip(horizontal);
         float vertical = Input.GetAxisRaw("Vertical");  //* deltaTime;
+        _movement = new Vector2(horizontal, vertical);
+
+
         if (vertical > 0){
             GetComponent<SpriteRenderer>().sprite = upSlime;
         }
-        _movement = new Vector2(horizontal, vertical);
-        if (Input.GetKeyUp(KeyCode.Space)){
-            print("Do nothing");
+
+        if (!Input.GetKey(KeyCode.Space)){
+            _rigidbody2D.velocity = _movement * speed;
         }
         else{
-           _rigidbody2D.velocity = _movement * speed;
-            
+            _rigidbody2D.velocity = _movement * 0;
         }
     }
 
-    private void Flip(float horizontal)
+    void Flip(float horizontal)
     {
         if (horizontal  > 0){
             sprite.flipX = false;
@@ -46,4 +48,5 @@ public class PlayerMovement : MonoBehaviour
             sprite.flipX = true;
         }
     }
+    
 }
