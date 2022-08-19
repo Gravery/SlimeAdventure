@@ -6,11 +6,13 @@ public class PlayerCollision : MonoBehaviour
     
     private Life life;
     private BasicAttack basicAttack;
+    private PlayerMovement pm;
 
     private void Awake()
     {
         life = GetComponent<Life>();
         basicAttack = GetComponent<BasicAttack>();
+        pm = GetComponent<PlayerMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,6 +26,23 @@ public class PlayerCollision : MonoBehaviour
                 life.TakeDamage(damageTaken);
             }
             basicAttack.CollidedEnemy();
+        }
+
+        if (collision.gameObject.CompareTag("Wall")){
+            
+            if (basicAttack.IsAttacking()){
+                basicAttack.CollidedEnemy();
+            }
+            else{
+                pm.StopMovement();
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision){
+        
+        if (collision.gameObject.CompareTag("Wall")){
+            pm.StopMovement();
         }
     }
 }

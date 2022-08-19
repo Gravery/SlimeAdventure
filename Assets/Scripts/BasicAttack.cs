@@ -41,7 +41,7 @@ public class BasicAttack : MonoBehaviour
             isAttacking = true;
         }
 
-        if ((Input.GetKeyUp(chargeAttack)) && attackChargeTimer < 1){
+        if ((Input.GetKeyUp(chargeAttack)) && attackChargeTimer < 0.8){
             attackChargeTimer = 0;
         }
 

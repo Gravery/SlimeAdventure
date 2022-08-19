@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody2D.velocity = _movement * speed;
         }
         else{
-            _rigidbody2D.velocity = _movement * 0;
+            StopMovement();
         }
     }
 
@@ -48,5 +48,11 @@ public class PlayerMovement : MonoBehaviour
             sprite.flipX = true;
         }
     }
+
+    public void StopMovement(){
+        _rigidbody2D.velocity = _movement * -1;
+        _rigidbody2D.velocity = _movement * 0;
+    }
+
     
 }

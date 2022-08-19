@@ -4,15 +4,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
-    [SerializeField] private int damageTaken = 3;
+    [SerializeField] private int damageTaken = 2;
 
     private GameObject player;
     private Life life;
+    private BasicAttack basicAttack;
     
     private void Awake()
     {
         life = GetComponent<Life>();
         player = GameObject.FindGameObjectWithTag("Player");
+        basicAttack = player.GetComponent<BasicAttack>();
     }
 
     private void Start()
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && basicAttack.IsAttacking())
         {
             life.TakeDamage(damageTaken);
         }
