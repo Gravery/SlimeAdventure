@@ -5,15 +5,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 6f;
     public Sprite standardSlime;
     public Sprite upSlime;
-    private Rigidbody2D _rigidbody2D;
-    private Vector2 _movement;
+    private Rigidbody2D rb;
+    private Vector2 move;
     private SpriteRenderer sprite;
 
     
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = standardSlime;
         Flip(horizontal);
         float vertical = Input.GetAxisRaw("Vertical");  //* deltaTime;
-        _movement = new Vector2(horizontal, vertical);
+        move = new Vector2(horizontal, vertical);
 
 
         if (vertical > 0){
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (!Input.GetKey(KeyCode.Space)){
-            _rigidbody2D.velocity = _movement * speed;
+            rb.velocity = move * speed;
         }
         else{
             StopMovement();
@@ -50,8 +50,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void StopMovement(){
-        _rigidbody2D.velocity = _movement * -1;
-        _rigidbody2D.velocity = _movement * 0;
+        rb.velocity = move * 0;
     }
 
     

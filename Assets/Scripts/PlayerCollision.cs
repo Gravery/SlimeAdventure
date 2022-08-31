@@ -16,8 +16,7 @@ public class PlayerCollision : MonoBehaviour
         pm = GetComponent<PlayerMovement>();
         dash = GetComponent<Dash>();
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -35,20 +34,12 @@ public class PlayerCollision : MonoBehaviour
             if (basicAttack.IsAttacking()){
                 basicAttack.CollidedEnemy();
             }
-            else{
-                pm.StopMovement();
-            }
-        }
-
-        if (collision.gameObject.CompareTag("EnableDash")){
-            dash.EnableDash();
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision){
-        
-        if (collision.gameObject.CompareTag("Wall")){
-            pm.StopMovement();
+    private void OnTriggerEnter2D(Collider2D collision){
+        if (collision.gameObject.CompareTag("EnableDash")){
+            dash.EnableDash();
         }
     }
 }
