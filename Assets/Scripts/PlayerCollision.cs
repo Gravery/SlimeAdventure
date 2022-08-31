@@ -21,7 +21,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (basicAttack.IsAttacking()){
-                print("No damage taken");
+                Debug.Log("No damage taken");
             }
             else{
                 life.TakeDamage(damageTaken);

@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 move;
     private SpriteRenderer sprite;
+    private DetectPlayerAction detect;
 
     
 
@@ -15,24 +16,34 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        detect = GetComponent<DetectPlayerAction>();
     }
 
     private void Update()
     {
         //float deltaTime = Time.deltaTime;
         float horizontal = Input.GetAxisRaw("Horizontal");  //* deltaTime;
-        GetComponent<SpriteRenderer>().sprite = standardSlime;
-        Flip(horizontal);
         float vertical = Input.GetAxisRaw("Vertical");  //* deltaTime;
         move = new Vector2(horizontal, vertical);
-
+        
+        Flip(horizontal);
 
         if (vertical > 0){
             GetComponent<SpriteRenderer>().sprite = upSlime;
         }
+        else{
+            if ((vertical < 0) || (horizontal != 0)){
+            GetComponent<SpriteRenderer>().sprite = standardSlime;
+            }
+        }
 
-        if (!Input.GetKey(KeyCode.Space)){
-            rb.velocity = move * speed;
+        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space))){
+            if (horizontal != 0 && vertical != 0){
+                rb.velocity = move * (speed / 1.4f);
+            }
+            else{
+                rb.velocity = move * speed;
+            }
         }
         else{
             StopMovement();

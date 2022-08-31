@@ -13,6 +13,8 @@ public class BasicAttack : MonoBehaviour
     private bool isAttacking;
     private Vector2 attackMove;
     private Rigidbody2D rb;
+    float horizontal;
+    float vertical;
 
 
     // Start is called before the first frame update
@@ -28,8 +30,8 @@ public class BasicAttack : MonoBehaviour
     void Update()
     {
 
-        float horizontal = Input.GetAxisRaw("Horizontal");  
-        float vertical = Input.GetAxisRaw("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal");  
+        vertical = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKey(chargeAttack)){
             attackChargeTimer += Time.deltaTime;
@@ -55,7 +57,12 @@ public class BasicAttack : MonoBehaviour
     }
 
     void Attack(){
-        rb.velocity = attackMove * attackSpeed;
+        if (horizontal != 0 && vertical != 0){
+        rb.velocity = attackMove * (attackSpeed / 1.4f);
+        }
+        else{
+            rb.velocity = attackMove * attackSpeed;
+        }
     }
 
     void Count(){
