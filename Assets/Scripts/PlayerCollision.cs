@@ -7,12 +7,14 @@ public class PlayerCollision : MonoBehaviour
     private Life life;
     private BasicAttack basicAttack;
     private PlayerMovement pm;
+    private Dash dash;
 
     private void Awake()
     {
         life = GetComponent<Life>();
         basicAttack = GetComponent<BasicAttack>();
         pm = GetComponent<PlayerMovement>();
+        dash = GetComponent<Dash>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,6 +38,10 @@ public class PlayerCollision : MonoBehaviour
             else{
                 pm.StopMovement();
             }
+        }
+
+        if (collision.gameObject.CompareTag("EnableDash")){
+            dash.EnableDash();
         }
     }
 

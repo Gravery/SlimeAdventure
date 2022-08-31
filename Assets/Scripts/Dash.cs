@@ -8,7 +8,7 @@ public class Dash : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 dashVector;
     public float dashSpeed;
-    public bool isDashing;
+    public bool isDashEnabled;
     public float startCooldown;
     private float cooldown;
     public bool onCooldown;
@@ -18,6 +18,7 @@ public class Dash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cooldown = startCooldown;
+        isDashEnabled = false;
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class Dash : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");  //* deltaTime;
         dashVector = new Vector2(horizontal, vertical);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && onCooldown == false){
+        if (Input.GetKeyDown(KeyCode.LeftShift) && onCooldown == false && isDashEnabled){
         transform.position += (Vector3)dashVector * dashSpeed;
         onCooldown = true;
         }
@@ -39,7 +40,9 @@ public class Dash : MonoBehaviour
                 cooldown = startCooldown;
             }
         }
-        
+    }
 
+    public void EnableDash(){
+        isDashEnabled = true;
     }    
 }
