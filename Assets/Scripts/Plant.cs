@@ -12,14 +12,17 @@ public class Plant : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * 15 * d;
     }
 
-    /*
     private void OnTriggerEnter2D(Collider2D other)
     {   
-        if(!other.gameObject.CompareTag("Player"))
+        
+        if(other.gameObject.CompareTag("Player") && d < 0)
         {
-            Destroy(gameObject);
-            Debug.Log("Bateu em: " + other);
+            if(Vector3.Distance(other.gameObject.transform.position, transform.position)<1f)
+            {
+                Debug.Log(Vector3.Distance(other.gameObject.transform.position, transform.position));
+                Destroy(gameObject);
+            }
         }
+        
     }
-    */
 }

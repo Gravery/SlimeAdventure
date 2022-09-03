@@ -16,7 +16,7 @@ public class PlayerAbilities : MonoBehaviour
     public float velFireball;
     public float maxLoadindFireball;
     private float loadFireball = 0;
-    public cooldownFireball cf;
+    public cooldownFireball cf; // BARRA DE CARREGAMENTO
     private Quaternion directionFireball;
 
     // VARIÁVEIS PARA ICE
@@ -28,7 +28,7 @@ public class PlayerAbilities : MonoBehaviour
 
     // PLANTA
     [SerializeField] float distanceBetween = 0.2f;
-    [SerializeField] List<GameObject> bodyParts = new List<GameObject>();
+    List<GameObject> bodyParts = new List<GameObject>();
     List<GameObject> plantBody = new List<GameObject>();
     public GameObject plantPrefab;
     float countUp;
@@ -61,9 +61,35 @@ public class PlayerAbilities : MonoBehaviour
             Plant();
     }
 
+    void FixedUpdate() {
+        if(bodyParts.Count > 0 && shooting)
+        {
+            countUp += Time.deltaTime;
+            if(countUp >= distanceBetween)
+            {
+                GameObject temp = Instantiate(bodyParts[0], playerTransform.position, plantRotation);
+                plantBody.Add(temp);
+                bodyParts.RemoveAt(0);
+                //temp.GetComponent<Rigidbody2D>().velocity = plantBody[0].transform.right * speed;
+                countUp = 0;
+
+                // Caso tenha invocado 15, destrói o último instanciado
+                // Serve para consertar um bug
+                if(plantBody.Count == 15)
+                {
+                    Destroy(plantBody[14]);
+                }
+            }
+        }
+    }
     
     void Fireball()
     {
+        /*
+        Descrição: Apertando espaço existe um carregamento de 1.5 seg para poder atirar
+        a bola de fogo, a direção dela depende das teclas WASD apertadas 
+        durante a soltura do espaço.
+        */
         if(Input.GetButton("Jump"))
         {
             if(loadFireball < 1.5f)
@@ -87,7 +113,8 @@ public class PlayerAbilities : MonoBehaviour
             cf.SetLoading(loadFireball);
             //Debug.Log(loadFireball);
         }
-            
+
+        // Ativa ou desativa a barra de carregamento    
         if(loadFireball == 0)
         {
             cf.gameObject.SetActive(false);
@@ -162,15 +189,25 @@ public class PlayerAbilities : MonoBehaviour
             if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
             {
                 plantRotation = FireballDirection();
-                //Debug.Log(plantRotation);
+            }
+
+            
+            while(bodyParts.Count <15)
+            {
+                bodyParts.Insert(0, plantPrefab);
             }
         }
 
         if(Input.GetButtonUp("Jump"))
+        {
             shooting = true;
+            plantBody.Clear();
+        }
+            
 
         if(bodyParts.Count > 0 && shooting)
         {
+            /*
             countUp += Time.deltaTime;
             if(countUp >= distanceBetween)
             {
@@ -180,23 +217,15 @@ public class PlayerAbilities : MonoBehaviour
                 //temp.GetComponent<Rigidbody2D>().velocity = plantBody[0].transform.right * speed;
                 countUp = 0;
             }
+            */
         }
         else
         {
             shooting = false;
             for(int i = 0; i < plantBody.Count; i++)
             {
-                if(plantBody[i])
-                {
-                    //plantBody[i].GetComponent<Rigidbody2D>().velocity = plantBody[i].transform.right * -speed;
+                if(plantBody[i]) 
                     plantBody[i].GetComponent<Plant>().d = -1;
-                    if(Vector3.Distance(playerTransform.position, plantBody[i].transform.position)<0.1f)
-                    {
-                        bodyParts.Insert(0,plantPrefab);
-                        Destroy(plantBody[i]);
-                        plantBody.Remove(plantBody[i]);
-                    }
-                }
             }
         }
     }
