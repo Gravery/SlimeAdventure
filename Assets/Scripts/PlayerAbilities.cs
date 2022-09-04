@@ -9,7 +9,9 @@ public class PlayerAbilities : MonoBehaviour
     public bool unlockFireball;
     public bool unlockIce;
     public bool unlockPlant;
-    
+    private Quaternion skillDirection;
+
+
     // VARIÁVEIS PARA FIREBALL
     public GameObject goFireball;
     public Transform playerTransform;
@@ -24,6 +26,7 @@ public class PlayerAbilities : MonoBehaviour
     public Tile ice;
     private Vector3Int position; 
     public Tilemap tilemap;
+    int iceDistance = 8; // Distância em TILES que o poder de gelo alcança 
 
 
     // PLANTA
@@ -39,13 +42,11 @@ public class PlayerAbilities : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        directionFireball.eulerAngles = new Vector3(0,0,0);
+        skillDirection.eulerAngles = new Vector3(0,0,0);
         cf.SetMaxTime(maxLoadindFireball);
         cf.SetLoading(0f);
 
-        shooting = false;
-
-        
+        shooting = false;   
     }
 
     // Update is called once per frame
@@ -59,28 +60,6 @@ public class PlayerAbilities : MonoBehaviour
 
         if(unlockPlant)
             Plant();
-    }
-
-    void FixedUpdate() {
-        if(bodyParts.Count > 0 && shooting)
-        {
-            countUp += Time.deltaTime;
-            if(countUp >= distanceBetween)
-            {
-                GameObject temp = Instantiate(bodyParts[0], playerTransform.position, plantRotation);
-                plantBody.Add(temp);
-                bodyParts.RemoveAt(0);
-                //temp.GetComponent<Rigidbody2D>().velocity = plantBody[0].transform.right * speed;
-                countUp = 0;
-
-                // Caso tenha invocado 15, destrói o último instanciado
-                // Serve para consertar um bug
-                if(plantBody.Count == 15)
-                {
-                    Destroy(plantBody[14]);
-                }
-            }
-        }
     }
     
     void Fireball()
@@ -97,13 +76,18 @@ public class PlayerAbilities : MonoBehaviour
                 loadFireball += Time.deltaTime;
                 cf.SetLoading(loadFireball);
             }
+
+            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
+            {
+                skillDirection = FireballDirection();
+            }
         }
         else
         {
             // ATIRAR
             if(loadFireball>= maxLoadindFireball)
             {
-                GameObject newFireball = Instantiate(goFireball, playerTransform.position, FireballDirection());
+                GameObject newFireball = Instantiate(goFireball, playerTransform.position, skillDirection);
                 //newFireball.GetComponent<Rigidbody2D>().velocity = transform.right * velFireball;
             }
                 
@@ -128,57 +112,186 @@ public class PlayerAbilities : MonoBehaviour
 
     void Ice()
     {
-        position = Vector3Int.FloorToInt(playerTransform.position);
-        if(Input.GetKey("d"))
+        if(Input.GetButton("Jump"))
         {
-            position.x += 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.y += 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.y -= 2;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
+            if(loadFireball < 1.5f)
+            {
+                loadFireball += Time.deltaTime;
+                cf.SetLoading(loadFireball);
+            }
+
+            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
+            {
+                skillDirection = FireballDirection();
+                Debug.Log(skillDirection.eulerAngles);
+            }
+        }
+        else
+        {
+            position = Vector3Int.FloorToInt(playerTransform.position);
+            // ATIRAR
+            if(loadFireball>= maxLoadindFireball)
+            {
+                // DIREITA - D
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 0))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.x += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y -= 2;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y += 1;
+                    }
+                }
+
+                // CIMA - W
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 90))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.y += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 2;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 1;
+                    }
+                }
+
+                // ESQUERDA - A
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 180))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.x -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y += 2;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y -= 1;
+                    }
+                }
+
+                // BAIXO - S
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 90))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.y -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 2;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 1;
+                    }
+                }
+
+                // DIAGONAL SUP DIREITA - W+D  
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 45))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.x += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 1;
+                    }
+                }
+
+                // DIAGONAL SUP ESQUERDA - W+A  
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 135))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.x -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 1;
+                    }
+                }
+
+                // DIAGONAL INF ESQUERDA - S+A  
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 225))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.x -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 1;
+                    }
+                }
+
+                // DIAGONAL INF DIREITA - S+D  
+                if(skillDirection.eulerAngles == new Vector3(0, 0, 315))
+                {
+                    for(int i = 0; i < iceDistance; i++)
+                    {
+                        position.x += 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.y -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x -= 1;
+                        if(tilemap.GetTile(position) == water)
+                            tilemap.SetTile(position, ice);
+                        position.x += 1;
+                    }
+                }
+            }
+                
+
+
+            loadFireball = 0f;
+            cf.SetLoading(loadFireball);
+            //Debug.Log(loadFireball);
         }
 
-        if(Input.GetKey("a"))
+        // Ativa ou desativa a barra de carregamento    
+        if(loadFireball == 0)
         {
-            position.x -= 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.y += 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.y -= 2;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
+            cf.gameObject.SetActive(false);
         }
-
-        if(Input.GetKey("w"))
+        else
         {
-            position.y += 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.x += 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.x -= 2;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-        }
-
-        if(Input.GetKey("s"))
-        {
-            position.y -= 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.x += 1;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
-            position.x -= 2;
-            if(tilemap.GetTile(position) == water)
-                tilemap.SetTile(position, ice);
+            cf.gameObject.SetActive(true);
         }
     }
 
@@ -188,7 +301,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
             {
-                plantRotation = FireballDirection();
+                skillDirection = FireballDirection();
             }
 
             
@@ -205,29 +318,44 @@ public class PlayerAbilities : MonoBehaviour
         }
             
 
-        if(bodyParts.Count > 0 && shooting)
+        if(bodyParts.Count == 0)
         {
-            /*
-            countUp += Time.deltaTime;
-            if(countUp >= distanceBetween)
-            {
-                GameObject temp = Instantiate(bodyParts[0], playerTransform.position, plantRotation);
-                plantBody.Add(temp);
-                bodyParts.RemoveAt(0);
-                //temp.GetComponent<Rigidbody2D>().velocity = plantBody[0].transform.right * speed;
-                countUp = 0;
-            }
-            */
-        }
-        else
-        {
-            shooting = false;
             for(int i = 0; i < plantBody.Count; i++)
             {
                 if(plantBody[i]) 
                     plantBody[i].GetComponent<Plant>().d = -1;
             }
         }
+    }
+
+    // INSTÂNCIA CADA PARTE DAS PLANTAS
+    void FixedUpdate() {
+        //Precisa ser instanciadas em um FixedUpdate() ou elas saem com
+        //espaçamentos diferentes
+        if(bodyParts.Count > 0 && shooting)
+        {
+            countUp += Time.deltaTime;
+            if(countUp >= distanceBetween)
+            {
+                GameObject temp = Instantiate(bodyParts[0], playerTransform.position, skillDirection);
+                plantBody.Add(temp);
+                bodyParts.RemoveAt(0);
+                //temp.GetComponent<Rigidbody2D>().velocity = plantBody[0].transform.right * speed;
+                countUp = 0;
+
+                // Caso tenha invocado 15, destrói o último instanciado
+                // Serve para consertar um bug
+                if(plantBody.Count == 15)
+                {
+                    Destroy(plantBody[14]);
+                }
+            }
+        }
+        else
+        {
+            if(plantBody.Count == 0) shooting = false;
+        }
+
     }
     
 

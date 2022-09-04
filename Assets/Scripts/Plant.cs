@@ -14,15 +14,12 @@ public class Plant : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {   
-        
         if(other.gameObject.CompareTag("Player") && d < 0)
         {
             if(Vector3.Distance(other.gameObject.transform.position, transform.position)<1f)
             {
-                Debug.Log(Vector3.Distance(other.gameObject.transform.position, transform.position));
                 Destroy(gameObject);
             }
         }
-        
     }
 }
