@@ -6,6 +6,7 @@ public class DetectPlayerAction : MonoBehaviour
 {
     private BasicAttack basicAttack;
     private Dash dash;
+    private PlayerCollision collision;
 
     
     // Start is called before the first frame update
@@ -13,9 +14,10 @@ public class DetectPlayerAction : MonoBehaviour
     {
         basicAttack = GetComponent<BasicAttack>();
         dash = GetComponent<Dash>();
+        collision = GetComponent<PlayerCollision>();
     }
 
     public bool IsInAction(){
-        return ((dash.IsDashing()) || (basicAttack.IsAttacking()));
+        return ((dash.IsDashing()) || (basicAttack.IsAttacking()) || collision.IsTakingDamage());
     }
 }

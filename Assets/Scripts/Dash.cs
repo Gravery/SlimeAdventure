@@ -72,7 +72,7 @@ public class Dash : MonoBehaviour
         dashTimer -= Time.deltaTime;
     }
 
-    void Reset(){
+    public void Reset(){
         dashTimer = dashStartTimer;
         isDashing = false;
     }
