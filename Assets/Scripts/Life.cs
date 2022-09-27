@@ -3,12 +3,18 @@ using UnityEngine.UI;
 
 public class Life : MonoBehaviour
 {
-    [SerializeField] private int health = 5;
+    [SerializeField] private int health;
+    [SerializeField] private IntSO healthSO;
+
+    private void Start() {
+        health = healthSO.Value;
+        Debug.Log(health);
+    }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-
+        healthSO.Value -= damage;
+        health = healthSO.Value;
         if (health <= 0)
         {
             Death();
@@ -22,5 +28,14 @@ public class Life : MonoBehaviour
 
     public int getHealth(){
         return health;
+    }
+
+
+    private void Update() {
+        // PARA TESTES COM A VIDA
+        if(Input.GetKeyDown("p"))
+        {
+            TakeDamage(1);
+        }
     }
 }
