@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerAbilities : MonoBehaviour
+public class PlayerSkills : MonoBehaviour
 {
     // Variaveis para desbloqueio dos poderes
     public bool unlockFireball;
     public bool unlockIce;
     public bool unlockPlant;
     private Quaternion skillDirection;
-
+    private bool isUsingSkill; 
 
     // VARIÁVEIS PARA FIREBALL
     public GameObject goFireball;
@@ -34,10 +34,11 @@ public class PlayerAbilities : MonoBehaviour
     List<GameObject> bodyParts = new List<GameObject>();
     List<GameObject> plantBody = new List<GameObject>();
     public GameObject plantPrefab;
-    float countUp;
-    bool shooting;
-    Quaternion plantRotation;
-
+    private float countUp;
+    private bool shooting;
+    private bool touchSomething;
+    private Quaternion plantRotation;
+    private bool correcao; // CRIADO UNICAMENTE PARA CORREÇÃO DE BUG
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class PlayerAbilities : MonoBehaviour
         cf.SetLoading(0f);
 
         shooting = false;   
+        isUsingSkill = false;
     }
 
     // Update is called once per frame
@@ -91,7 +93,6 @@ public class PlayerAbilities : MonoBehaviour
                 //newFireball.GetComponent<Rigidbody2D>().velocity = transform.right * velFireball;
             }
                 
-
 
             loadFireball = 0f;
             cf.SetLoading(loadFireball);
@@ -305,25 +306,49 @@ public class PlayerAbilities : MonoBehaviour
             }
 
             
-            while(bodyParts.Count <15)
+            while(bodyParts.Count <20)
             {
                 bodyParts.Insert(0, plantPrefab);
             }
+            touchSomething = false;
         }
 
+        // Inicia o lançamento da vinha 
         if(Input.GetButtonUp("Jump"))
         {
             shooting = true;
-            plantBody.Clear();
         }
             
+        // Caso o player lance toda a vinha ou ela toque em alguma coisa
+        if(bodyParts.Count == 0 || touchSomething)
+        {   
+            //É necessário eliminar as últimas 2 vinhas invocadas 
+            // para elas não saírem voando infinitamente
+            if(correcao){
+                if(plantBody[0].GetComponent<Plant>().d == 1){
+                    Destroy(plantBody[plantBody.Count-1]);
+                    Destroy(plantBody[plantBody.Count-2]);
+                    correcao = false;
+                }
+            }
 
-        if(bodyParts.Count == 0)
-        {
+            // Mudando o sentido de movimento da vinha
             for(int i = 0; i < plantBody.Count; i++)
             {
                 if(plantBody[i]) 
                     plantBody[i].GetComponent<Plant>().d = -1;
+            }
+        }
+
+        // Quando o player parar de lançar completamente a vinha
+        if(plantBody.Count != 0){
+            if(!plantBody[0]){
+                shooting = false;
+                isUsingSkill = false;
+                plantBody.Clear();
+            }
+            else{
+                touchSomething = plantBody[0].GetComponent<Plant>().touchSomething;
             }
         }
     }
@@ -332,30 +357,19 @@ public class PlayerAbilities : MonoBehaviour
     void FixedUpdate() {
         //Precisa ser instanciadas em um FixedUpdate() ou elas saem com
         //espaçamentos diferentes
-        if(bodyParts.Count > 0 && shooting)
+        if(bodyParts.Count > 0 && shooting && !touchSomething)
         {
+            correcao = true;
+            isUsingSkill = true;
             countUp += Time.deltaTime;
             if(countUp >= distanceBetween)
             {
                 GameObject temp = Instantiate(bodyParts[0], playerTransform.position, skillDirection);
                 plantBody.Add(temp);
                 bodyParts.RemoveAt(0);
-                //temp.GetComponent<Rigidbody2D>().velocity = plantBody[0].transform.right * speed;
                 countUp = 0;
-
-                // Caso tenha invocado 15, destrói o último instanciado
-                // Serve para consertar um bug
-                if(plantBody.Count == 15)
-                {
-                    Destroy(plantBody[14]);
-                }
             }
         }
-        else
-        {
-            if(plantBody.Count == 0) shooting = false;
-        }
-
     }
     
 
@@ -396,5 +410,9 @@ public class PlayerAbilities : MonoBehaviour
         }
 
         return directionFireball;
+    }
+
+    public bool IsUsingSkill(){
+        return isUsingSkill;
     }
 }

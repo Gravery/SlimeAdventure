@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  healthSO: {fileID: 0}
 --- !u!50 &586422107
 Rigidbody2D:
   serializedVersion: 4
@@ -1315,6 +1316,18 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1505234670}
+    - target: {fileID: 6472696382894937081, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
+      propertyPath: unlockIce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472696382894937081, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
+      propertyPath: unlockPlant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472696382894937081, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
+      propertyPath: distanceBetween
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6472696384772885285, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
