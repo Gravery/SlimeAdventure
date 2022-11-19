@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int damageTaken = 2;
 
     private GameObject player;
-    private Life life;
+    private EnemyLife life;
     private BasicAttack basicAttack;
     Rigidbody2D rb;
     public bool vertical;
@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     
     private void Awake()
     {
-        life = GetComponent<Life>();
+        life = GetComponent<EnemyLife>();
         player = GameObject.FindGameObjectWithTag("Player");
         basicAttack = player.GetComponent<BasicAttack>();
         rb = GetComponent<Rigidbody2D>();
