@@ -5,12 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class PlayerSkills : MonoBehaviour
 {
-    // Variaveis para desbloqueio dos poderes
+    // Variaveis gerais
     public bool unlockFireball;
     public bool unlockIce;
     public bool unlockPlant;
     private Quaternion skillDirection;
     private bool isUsingSkill; 
+    private int skillCount; // PARA USO NOS TESTES
 
     // VARIÁVEIS PARA FIREBALL
     public GameObject goFireball;
@@ -22,11 +23,7 @@ public class PlayerSkills : MonoBehaviour
     private Quaternion directionFireball;
 
     // VARIÁVEIS PARA ICE
-    public Tile water;
-    public Tile ice;
-    private Vector3Int position; 
-    public Tilemap tilemap;
-    int iceDistance = 8; // Distância em TILES que o poder de gelo alcança 
+    public GameObject icePower;
 
 
     // PLANTA
@@ -49,19 +46,27 @@ public class PlayerSkills : MonoBehaviour
 
         shooting = false;   
         isUsingSkill = false;
+        skillCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(unlockFireball)
+        if(Input.GetKeyDown("f")){
+            skillCount++;
+            if(skillCount==3)
+                skillCount=0;
+        }
+
+        if(skillCount==0 && unlockFireball)
             Fireball();
         
-        if(unlockIce)
+        if(skillCount==1 && unlockIce)
             Ice();
 
-        if(unlockPlant)
+        if(skillCount==2 && unlockPlant)
             Plant();
+
     }
     
     void Fireball()
@@ -96,7 +101,6 @@ public class PlayerSkills : MonoBehaviour
 
             loadFireball = 0f;
             cf.SetLoading(loadFireball);
-            //Debug.Log(loadFireball);
         }
 
         // Ativa ou desativa a barra de carregamento    
@@ -122,176 +126,27 @@ public class PlayerSkills : MonoBehaviour
             }
 
             if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
-            {
                 skillDirection = FireballDirection();
-                Debug.Log(skillDirection.eulerAngles);
-            }
+            
         }
         else
         {
-            position = Vector3Int.FloorToInt(playerTransform.position);
             // ATIRAR
             if(loadFireball>= maxLoadindFireball)
             {
-                // DIREITA - D
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 0))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.x += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y -= 2;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y += 1;
-                    }
-                }
-
-                // CIMA - W
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 90))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.y += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 2;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 1;
-                    }
-                }
-
-                // ESQUERDA - A
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 180))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.x -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y += 2;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y -= 1;
-                    }
-                }
-
-                // BAIXO - S
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 90))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.y -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 2;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 1;
-                    }
-                }
-
-                // DIAGONAL SUP DIREITA - W+D  
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 45))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.x += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 1;
-                    }
-                }
-
-                // DIAGONAL SUP ESQUERDA - W+A  
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 135))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.x -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 1;
-                    }
-                }
-
-                // DIAGONAL INF ESQUERDA - S+A  
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 225))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.x -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 1;
-                    }
-                }
-
-                // DIAGONAL INF DIREITA - S+D  
-                if(skillDirection.eulerAngles == new Vector3(0, 0, 315))
-                {
-                    for(int i = 0; i < iceDistance; i++)
-                    {
-                        position.x += 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.y -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x -= 1;
-                        if(tilemap.GetTile(position) == water)
-                            tilemap.SetTile(position, ice);
-                        position.x += 1;
-                    }
-                }
+                GameObject newIce = Instantiate(icePower, playerTransform.position, skillDirection);
             }
                 
 
-
             loadFireball = 0f;
             cf.SetLoading(loadFireball);
-            //Debug.Log(loadFireball);
         }
 
         // Ativa ou desativa a barra de carregamento    
-        if(loadFireball == 0)
-        {
+        if(loadFireball == 0){
             cf.gameObject.SetActive(false);
         }
-        else
-        {
+        else{
             cf.gameObject.SetActive(true);
         }
     }

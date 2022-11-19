@@ -42,7 +42,7 @@ Transform:
   m_Children:
   - {fileID: 6472696384427075307}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6472696382894936068
 SpriteRenderer:
@@ -243,17 +243,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e7ba06fe991ea4aa8ad59cd832b2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockFireball: 0
+  unlockFireball: 1
   unlockIce: 1
-  unlockPlant: 0
+  unlockPlant: 1
   goFireball: {fileID: 8677379630315866061, guid: 01309ba3e2f9d14479c4abb26ae966bf, type: 3}
   playerTransform: {fileID: 6472696382894936069}
   velFireball: 15
   maxLoadindFireball: 1.5
   cf: {fileID: 6472696384427075311}
-  water: {fileID: 11400000, guid: 0a83403e2785e6d4590d538af5c1e3d1, type: 2}
-  ice: {fileID: 11400000, guid: 26091188a179e3e40a5638e1794c0cbc, type: 2}
-  tilemap: {fileID: 0}
+  icePower: {fileID: 3256895396818190912, guid: ca95fb9124443534d9470ccfbdbc9216, type: 3}
   distanceBetween: 0.05
   plantPrefab: {fileID: 1999898752243699621, guid: bbd46e7824fdb7a49b984b9923bda97f, type: 3}
 --- !u!114 &6472696382894937082
