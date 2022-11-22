@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
     private EnemyLife life;
-    private BasicAttack basicAttack;
+    private PlayerAttack basicAttack;
     Rigidbody2D rb;
     public bool vertical;
     public float changeTime = 3.0f;
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     {
         life = GetComponent<EnemyLife>();
         player = GameObject.FindGameObjectWithTag("Player");
-        basicAttack = player.GetComponent<BasicAttack>();
+        basicAttack = player.GetComponent<PlayerAttack>();
         rb = GetComponent<Rigidbody2D>();
         timer = changeTime;
     }

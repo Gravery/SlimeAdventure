@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
 
     public KeyCode chargeAttack;

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class DetectPlayerAction : MonoBehaviour
 {
-    private BasicAttack basicAttack;
-    private Dash dash;
+    private PlayerAttack basicAttack;
+    private PlayerDash dash;
     private PlayerCollision collision;
 
     private PlayerSkills skill;
 
     
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        basicAttack = GetComponent<BasicAttack>();
-        dash = GetComponent<Dash>();
+        basicAttack = GetComponent<PlayerAttack>();
+        dash = GetComponent<PlayerDash>();
         collision = GetComponent<PlayerCollision>();
 
         skill = GetComponent<PlayerSkills>();

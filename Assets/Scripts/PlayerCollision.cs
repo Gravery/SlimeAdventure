@@ -5,9 +5,9 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private int damageTaken = 1;
     
     private Life life;
-    private BasicAttack basicAttack;
+    private PlayerAttack basicAttack;
     private PlayerMovement pm;
-    private Dash dash;
+    private PlayerDash dash;
     private Rigidbody2D rb;
     private bool isTakingDamage;
     private float damageTimer;
@@ -16,9 +16,9 @@ public class PlayerCollision : MonoBehaviour
     private void Awake()
     {
         life = GetComponent<Life>();
-        basicAttack = GetComponent<BasicAttack>();
+        basicAttack = GetComponent<PlayerAttack>();
         pm = GetComponent<PlayerMovement>();
-        dash = GetComponent<Dash>();
+        dash = GetComponent<PlayerDash>();
         rb = GetComponent<Rigidbody2D>();
         isTakingDamage = false;
         damageTimer = 0.15f;
@@ -42,7 +42,7 @@ public class PlayerCollision : MonoBehaviour
             if (!basicAttack.IsAttacking()){
                 direction = collision.GetContact(0).normal;
                 life.TakeDamage(damageTaken);
-                GetComponent<Dash>().Reset();
+                GetComponent<PlayerDash>().Reset();
                 isTakingDamage = true;
             }
             if (collision.gameObject.CompareTag("Enemy"))

@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    private void Awake()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = move * speed;
             }
         }
-        else{
+        if (!detect.IsInAction() && (Input.GetKey(KeyCode.Space))){
             StopMovement();
         }
     }
