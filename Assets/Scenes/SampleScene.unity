@@ -434,6 +434,7 @@ MonoBehaviour:
   speed: 3
   damageTaken: 3
   vertical: 0
+  followPlayer: 0
   changeTime: 3
 --- !u!50 &586422107
 Rigidbody2D:

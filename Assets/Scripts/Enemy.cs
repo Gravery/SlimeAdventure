@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private PlayerAttack basicAttack;
     Rigidbody2D rb;
     public bool vertical;
+    public bool followPlayer;
     public float changeTime = 3.0f;
     float timer;
     int direction = 1;
@@ -53,8 +54,13 @@ public class Enemy : MonoBehaviour
         {
             position.x = position.x + Time.deltaTime * speed * direction;;
         }
+        if(followPlayer){
+            Movement();
+        }
+        else{
+            rb.MovePosition(position);
+        }
         
-        rb.MovePosition(position);
     }
     private void Movement()
     {
