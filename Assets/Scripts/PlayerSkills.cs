@@ -16,15 +16,15 @@ public class PlayerSkills : MonoBehaviour
     // VARIÁVEIS PARA FIREBALL
     public GameObject goFireball;
     public Transform playerTransform;
-    public float velFireball;
-    public float maxLoadindFireball;
+    public float maxLoadFireball;
     private float loadFireball = 0;
     public cooldownFireball cf; // BARRA DE CARREGAMENTO
     private Quaternion directionFireball;
 
     // VARIÁVEIS PARA ICE
     public GameObject icePower;
-
+    private float loadIce = 0;
+    public float maxLoadIce;
 
     // PLANTA
     [SerializeField] float distanceBetween = 0.2f;
@@ -41,7 +41,7 @@ public class PlayerSkills : MonoBehaviour
     void Start()
     {
         skillDirection.eulerAngles = new Vector3(0,0,0);
-        cf.SetMaxTime(maxLoadindFireball);
+        cf.SetMaxTime(maxLoadFireball);
         cf.SetLoading(0f);
 
         shooting = false;   
@@ -76,9 +76,11 @@ public class PlayerSkills : MonoBehaviour
         a bola de fogo, a direção dela depende das teclas WASD apertadas 
         durante a soltura do espaço.
         */
+        cf.SetMaxTime(maxLoadFireball); // Tempo máximo para disparar
+
         if(Input.GetButton("Jump"))
         {
-            if(loadFireball < 1.5f)
+            if(loadFireball < maxLoadFireball)
             {
                 loadFireball += Time.deltaTime;
                 cf.SetLoading(loadFireball);
@@ -92,49 +94,9 @@ public class PlayerSkills : MonoBehaviour
         else
         {
             // ATIRAR
-            if(loadFireball>= maxLoadindFireball)
+            if(loadFireball>= maxLoadFireball)
             {
                 GameObject newFireball = Instantiate(goFireball, playerTransform.position, skillDirection);
-                //newFireball.GetComponent<Rigidbody2D>().velocity = transform.right * velFireball;
-            }
-                
-
-            loadFireball = 0f;
-            cf.SetLoading(loadFireball);
-        }
-
-        // Ativa ou desativa a barra de carregamento    
-        if(loadFireball == 0)
-        {
-            cf.gameObject.SetActive(false);
-        }
-        else
-        {
-            cf.gameObject.SetActive(true);
-        }
-            
-    }
-
-    void Ice()
-    {
-        if(Input.GetButton("Jump"))
-        {
-            if(loadFireball < 1.5f)
-            {
-                loadFireball += Time.deltaTime;
-                cf.SetLoading(loadFireball);
-            }
-
-            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
-                skillDirection = FireballDirection();
-            
-        }
-        else
-        {
-            // ATIRAR
-            if(loadFireball>= maxLoadindFireball)
-            {
-                GameObject newIce = Instantiate(icePower, playerTransform.position, skillDirection);
             }
                 
 
@@ -144,6 +106,44 @@ public class PlayerSkills : MonoBehaviour
 
         // Ativa ou desativa a barra de carregamento    
         if(loadFireball == 0){
+            cf.gameObject.SetActive(false);
+        }
+        else{
+            cf.gameObject.SetActive(true);
+        }
+            
+    }
+
+    void Ice()
+    {
+        cf.SetMaxTime(maxLoadIce);
+
+        if(Input.GetButton("Jump"))
+        {
+            if(loadIce < maxLoadIce){
+                loadIce += Time.deltaTime;
+                cf.SetLoading(loadIce);
+            }
+
+            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
+                skillDirection = FireballDirection();
+            
+        }
+        else
+        {
+            // ATIRAR
+            if(loadIce>= maxLoadIce)
+            {
+                GameObject newIce = Instantiate(icePower, playerTransform.position, skillDirection);
+            }
+                
+
+            loadIce = 0f;
+            cf.SetLoading(loadIce);
+        }
+
+        // Ativa ou desativa a barra de carregamento    
+        if(loadIce == 0){
             cf.gameObject.SetActive(false);
         }
         else{

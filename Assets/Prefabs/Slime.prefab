@@ -248,10 +248,10 @@ MonoBehaviour:
   unlockPlant: 1
   goFireball: {fileID: 8677379630315866061, guid: 01309ba3e2f9d14479c4abb26ae966bf, type: 3}
   playerTransform: {fileID: 6472696382894936069}
-  velFireball: 15
-  maxLoadindFireball: 1.5
+  maxLoadFireball: 1
   cf: {fileID: 6472696384427075311}
   icePower: {fileID: 3256895396818190912, guid: ca95fb9124443534d9470ccfbdbc9216, type: 3}
+  maxLoadIce: 0.75
   distanceBetween: 0.05
   plantPrefab: {fileID: 1999898752243699621, guid: bbd46e7824fdb7a49b984b9923bda97f, type: 3}
 --- !u!114 &6472696382894937082
