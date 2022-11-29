@@ -77,5 +77,14 @@ public class Enemy : MonoBehaviour
         {
             life.TakeDamage(damageTaken);
         }
+
+        if (collision.gameObject.CompareTag("Fireball"))
+        {
+            life.TakeDamage(damageTaken);
+        }
+    }
+
+    public void TakeDamageSkill(int damage){
+        life.TakeDamage(damage);
     }
 }

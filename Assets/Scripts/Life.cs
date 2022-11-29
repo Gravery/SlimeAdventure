@@ -8,7 +8,7 @@ public class Life : MonoBehaviour
 
     private void Start() {
         health = healthSO.Value;
-        Debug.Log(health);
+        //Debug.Log(health);
     }
 
     public void TakeDamage(int damage)

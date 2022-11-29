@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space))){
+        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z)))){
             if (horizontal != 0 && vertical != 0){
                 rb.velocity = move * (speed / 1.4f);
             }
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = move * speed;
             }
         }
-        if (!detect.IsInAction() && (Input.GetKey(KeyCode.Space))){
+        if ((!detect.IsInAction() && (Input.GetKey(KeyCode.Space))) || (Input.GetKey(KeyCode.Z)) ){
             StopMovement();
         }
     }

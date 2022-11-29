@@ -6,7 +6,7 @@ public class EnemyLife : MonoBehaviour
     [SerializeField] private int health;
 
     private void Start() {
-        Debug.Log(health);
+        //Debug.Log(health);
     }
 
     public void TakeDamage(int damage)

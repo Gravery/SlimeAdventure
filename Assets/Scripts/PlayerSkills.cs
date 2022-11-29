@@ -52,7 +52,7 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("f")){
+        if(Input.GetKeyDown("x")){
             skillCount++;
             if(skillCount==3)
                 skillCount=0;
@@ -78,21 +78,23 @@ public class PlayerSkills : MonoBehaviour
         */
         cf.SetMaxTime(maxLoadFireball); // Tempo máximo para disparar
 
-        if(Input.GetButton("Jump"))
+        if(Input.GetKey(KeyCode.Z))
         {
+            isUsingSkill = true;
             if(loadFireball < maxLoadFireball)
             {
                 loadFireball += Time.deltaTime;
                 cf.SetLoading(loadFireball);
             }
 
-            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
-            {
+            if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || 
+               Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)){
                 skillDirection = FireballDirection();
             }
         }
         else
         {
+            isUsingSkill = false;
             // ATIRAR
             if(loadFireball>= maxLoadFireball)
             {
@@ -118,19 +120,22 @@ public class PlayerSkills : MonoBehaviour
     {
         cf.SetMaxTime(maxLoadIce);
 
-        if(Input.GetButton("Jump"))
+        if(Input.GetKey(KeyCode.Z))
         {
+            isUsingSkill = true;
             if(loadIce < maxLoadIce){
                 loadIce += Time.deltaTime;
                 cf.SetLoading(loadIce);
             }
 
-            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
+            if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || 
+               Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))
                 skillDirection = FireballDirection();
             
         }
         else
         {
+            isUsingSkill = false;
             // ATIRAR
             if(loadIce>= maxLoadIce)
             {
@@ -153,23 +158,23 @@ public class PlayerSkills : MonoBehaviour
 
     void Plant()
     {
-        if(Input.GetButton("Jump") && !shooting)
+        if(Input.GetKey(KeyCode.Z) && !shooting)
         {
-            if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") )
-            {
+            if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || 
+               Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)){
                 skillDirection = FireballDirection();
             }
 
             
-            while(bodyParts.Count <20)
-            {
+            while(bodyParts.Count <20){
                 bodyParts.Insert(0, plantPrefab);
             }
             touchSomething = false;
+            isUsingSkill = true;
         }
 
         // Inicia o lançamento da vinha 
-        if(Input.GetButtonUp("Jump"))
+        if(Input.GetKeyUp(KeyCode.Z))
         {
             shooting = true;
         }
@@ -231,35 +236,35 @@ public class PlayerSkills : MonoBehaviour
     private Quaternion FireballDirection()
     {
         // Determina a direção em que a bola de fogo será atirada
-        if(Input.GetKey("w"))
+        if(Input.GetKey(KeyCode.UpArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,90);
         }
-        if(Input.GetKey("a"))
+        if(Input.GetKey(KeyCode.LeftArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,180);
         }
-        if(Input.GetKey("s"))
+        if(Input.GetKey(KeyCode.DownArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,270);
         }
-        if(Input.GetKey("d"))
+        if(Input.GetKey(KeyCode.RightArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,0);
         }
-        if(Input.GetKey("w") && Input.GetKey("d"))
+        if(Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,45);
         }
-        if(Input.GetKey("w") && Input.GetKey("a"))
+        if(Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,135);
         }
-        if(Input.GetKey("a") && Input.GetKey("s"))
+        if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.DownArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,225);
         }
-        if(Input.GetKey("s") && Input.GetKey("d"))
+        if(Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
         {
             directionFireball.eulerAngles = new Vector3(0,0,315);
         }
