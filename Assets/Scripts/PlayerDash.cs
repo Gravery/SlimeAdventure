@@ -23,7 +23,7 @@ public class PlayerDash : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         detect = GetComponent<DetectPlayerAction>();
         cooldown = startCooldown;
-        isDashEnabled = false;
+        isDashEnabled = true;
         isDashing = false;
     }
 

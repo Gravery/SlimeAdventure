@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6472696382894936070, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
+      propertyPath: MainCamera
+      value: 
+      objectReference: {fileID: 2026515177}
     - target: {fileID: 6472696382894936077, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
       propertyPath: m_Name
       value: Slime
@@ -793,6 +797,14 @@ PrefabInstance:
     - target: {fileID: 6472696384772885285, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6915648874258679174, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
+      propertyPath: onCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392751859086769728, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
+      propertyPath: chargeAttack
+      value: 32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
