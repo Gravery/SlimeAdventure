@@ -34,7 +34,9 @@ public class PlayerDash : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         dashVector = new Vector2(horizontal, vertical);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && onCooldown == false && isDashEnabled && !detect.IsInAction()){
+        if (!isDashEnabled) return;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !onCooldown && !detect.IsInAction()){
         isDashing = true;
         onCooldown = true;
         }

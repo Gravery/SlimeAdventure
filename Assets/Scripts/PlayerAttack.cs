@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     private Rigidbody2D rb;
     float horizontal;
     float vertical;
+    public cooldownFireball charging;
 
 
     // Start is called before the first frame update
@@ -23,6 +24,8 @@ public class PlayerAttack : MonoBehaviour
         attackChargeTimer = 0f;
         attackDuration =  0.5f;
         isAttacking = false;
+        charging.SetMaxTime(0.8f);
+        charging.SetLoading(attackChargeTimer);
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -35,9 +38,10 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKey(chargeAttack)){
             attackChargeTimer += Time.deltaTime;
+            charging.SetLoading(attackChargeTimer);
         }
 
-        if ((Input.GetKeyUp(chargeAttack)) && (attackChargeTimer >= 1) && (isAttacking == false)){
+        if ((Input.GetKeyUp(chargeAttack)) && (attackChargeTimer >= 0.8) && (isAttacking == false)){
             attackMove = new Vector2(horizontal, vertical);
             //GetComponent<SpriteRenderer>().sprite = attackImage;
             isAttacking = true;
@@ -45,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
 
         if ((Input.GetKeyUp(chargeAttack)) && attackChargeTimer < 0.8){
             attackChargeTimer = 0;
+            charging.SetLoading(attackChargeTimer);
         }
 
         if (isAttacking == true){
@@ -54,11 +59,15 @@ public class PlayerAttack : MonoBehaviour
                 Reset();
             } 
         }
+
+        if(attackChargeTimer != 0){
+            charging.gameObject.SetActive(true);
+        }
     }
 
     void Attack(){
         if (horizontal != 0 && vertical != 0){
-        rb.velocity = attackMove * (attackSpeed / 1.4f);
+            rb.velocity = attackMove * (attackSpeed / 1.4f);
         }
         else{
             rb.velocity = attackMove * attackSpeed;
@@ -69,10 +78,12 @@ public class PlayerAttack : MonoBehaviour
         attackDuration -= Time.deltaTime;
     }
 
-    void Reset(){
+    public void Reset(){
         attackChargeTimer = 0;
         attackDuration = 0.5f;
         isAttacking = false;
+        charging.SetLoading(0f);
+        charging.gameObject.SetActive(false);
     }
 
     public bool IsAttacking(){
@@ -81,6 +92,6 @@ public class PlayerAttack : MonoBehaviour
 
     public void CollidedEnemy(){
         attackMove = -attackMove;
-        attackDuration += 0.3f;
+        attackDuration += 0.2f;
     }
 }

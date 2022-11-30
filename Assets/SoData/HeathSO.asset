@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a699717624c93c4bb7708cd3253d234, type: 3}
   m_Name: HeathSO
   m_EditorClassIdentifier: 
-  _value: 5
+  _value: 10
