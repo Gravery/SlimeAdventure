@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = false;
         charging.SetMaxTime(0.8f);
         charging.SetLoading(attackChargeTimer);
+        charging.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
     }
 
