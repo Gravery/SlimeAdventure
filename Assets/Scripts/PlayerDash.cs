@@ -25,6 +25,7 @@ public class PlayerDash : MonoBehaviour
         cooldown = startCooldown;
         isDashEnabled = true;
         isDashing = false;
+        dashTimer = dashStartTimer;
     }
 
     // Update is called once per frame
@@ -41,19 +42,20 @@ public class PlayerDash : MonoBehaviour
         onCooldown = true;
         }
 
-        if (onCooldown){
-            cooldown -= Time.deltaTime;
-            if (cooldown <= 0){
-                onCooldown = false;
-                cooldown = startCooldown;
-            }
-        }
 
         if (isDashing){
             DoDash();
             Count();
             if (dashTimer <= 0){
                 Reset();
+            }
+        }
+
+        if (onCooldown){
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0){
+                onCooldown = false;
+                cooldown = startCooldown;
             }
         }
     }
