@@ -51,6 +51,8 @@ public class PlayerAttack : MonoBehaviour
         if ((Input.GetKeyUp(chargeAttack)) && attackChargeTimer < 0.8){
             attackChargeTimer = 0;
             charging.SetLoading(attackChargeTimer);
+            charging.gameObject.SetActive(false);
+
         }
 
         if (isAttacking == true){
