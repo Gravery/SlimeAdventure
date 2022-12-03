@@ -11,6 +11,10 @@ TagManager:
   - Trap
   - Fireball
   - Torch
+  - MaterialButtonLayer
+  - MaterialText
+  - MaterialRadioButton
+  - IceSkill
   layers:
   - Default
   - TransparentFX

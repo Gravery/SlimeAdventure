@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
         attackChargeTimer = 0f;
         attackDuration =  0.5f;
         isAttacking = false;
-        charging.SetMaxTime(0.8f);
+        charging.SetMaxTime(1f);
         charging.SetLoading(attackChargeTimer);
         charging.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
@@ -42,13 +42,16 @@ public class PlayerAttack : MonoBehaviour
             charging.SetLoading(attackChargeTimer);
         }
 
-        if ((Input.GetKeyUp(chargeAttack)) && (attackChargeTimer >= 0.8) && (isAttacking == false)){
+        if ((Input.GetKeyUp(chargeAttack)) && (attackChargeTimer >= 0.3) && (isAttacking == false)){
+            if (attackChargeTimer > 1) attackChargeTimer = 1;
+            attackDuration = attackDuration * attackChargeTimer;
+
             attackMove = new Vector2(horizontal, vertical);
             //GetComponent<SpriteRenderer>().sprite = attackImage;
             isAttacking = true;
         }
 
-        if ((Input.GetKeyUp(chargeAttack)) && attackChargeTimer < 0.8){
+        if ((Input.GetKeyUp(chargeAttack)) && attackChargeTimer < 0.3){
             attackChargeTimer = 0;
             charging.SetLoading(attackChargeTimer);
             charging.gameObject.SetActive(false);
@@ -96,5 +99,9 @@ public class PlayerAttack : MonoBehaviour
     public void CollidedEnemy(){
         attackMove = -attackMove;
         attackDuration += 0.2f;
+    }
+
+    public int DamageDone(){
+        return (int)(5*attackChargeTimer);
     }
 }

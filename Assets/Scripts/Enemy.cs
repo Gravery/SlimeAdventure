@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && basicAttack.IsAttacking())
         {
-            life.TakeDamage(damageTaken);
+            life.TakeDamage(basicAttack.DamageDone());
         }
 
         if (collision.gameObject.CompareTag("Fireball"))

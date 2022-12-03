@@ -53,7 +53,9 @@ public class PlayerCollision : MonoBehaviour
                 life.TakeDamage(damageTaken);
                 GetComponent<PlayerAttack>().Reset();
                 isTakingDamage = true;
+                return;
             }
+            return;
         }
 
         if (collision.gameObject.CompareTag("Wall")){
