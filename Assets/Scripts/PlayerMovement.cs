@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 move;
     private SpriteRenderer sprite;
     private DetectPlayerAction detect;
-
+    public float debuff;
     
 
     private void Start()
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         detect = GetComponent<DetectPlayerAction>();
+        debuff = 0f;
     }
 
     private void Update()
@@ -39,10 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
         if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z)))){
             if (horizontal != 0 && vertical != 0){
-                rb.velocity = move * (speed / 1.4f);
+                rb.velocity = move * (speed / 1.4f) * ((100-debuff)/100);
             }
             else{
-                rb.velocity = move * speed;
+                rb.velocity = move * speed * ((100-debuff)/100);
             }
         }
         if ((!detect.IsInAction() && (Input.GetKey(KeyCode.Space))) || (Input.GetKey(KeyCode.Z)) ){

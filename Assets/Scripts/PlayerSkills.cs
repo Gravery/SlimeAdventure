@@ -52,7 +52,7 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("x")){
+        if(Input.GetKeyDown("x") && !isUsingSkill){
             skillCount++;
             if(skillCount==3)
                 skillCount=0;
