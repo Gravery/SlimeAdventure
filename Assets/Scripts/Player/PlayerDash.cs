@@ -16,6 +16,7 @@ public class PlayerDash : MonoBehaviour
     private float dashTimer;
     public bool onCooldown;
     private bool isDashing;
+    float horizontal, vertical;
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +32,13 @@ public class PlayerDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");  
-        float vertical = Input.GetAxisRaw("Vertical");
-        dashVector = new Vector2(horizontal, vertical);
+        horizontal = Input.GetAxisRaw("Horizontal");  
+        vertical = Input.GetAxisRaw("Vertical");
+
+        if (horizontal != 0 || vertical != 0)
+        {
+            dashVector = new Vector2(horizontal, vertical);
+        }
 
         if (!isDashEnabled) return;
 
@@ -69,7 +74,14 @@ public class PlayerDash : MonoBehaviour
     }    
 
     void DoDash(){
-        rb.velocity = dashVector * dashSpeed;
+        if (horizontal != 0 && vertical != 0)
+        {
+            rb.velocity = dashVector * (dashSpeed /1.4f);
+        }
+        else
+        {
+            rb.velocity = dashVector * dashSpeed;
+        }
     }
 
     void Count(){

@@ -37,6 +37,11 @@ public class PlayerAttack : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");  
         vertical = Input.GetAxisRaw("Vertical");
 
+        if ((horizontal != 0 || vertical != 0) && !isAttacking)
+        {
+            attackMove = new Vector2(horizontal, vertical);
+        }
+
         if (Input.GetKey(chargeAttack)){
             attackChargeTimer += Time.deltaTime;
             charging.SetLoading(attackChargeTimer);
@@ -45,8 +50,6 @@ public class PlayerAttack : MonoBehaviour
         if ((Input.GetKeyUp(chargeAttack)) && (attackChargeTimer >= 0.3) && (isAttacking == false)){
             if (attackChargeTimer > 1) attackChargeTimer = 1;
             attackDuration = attackDuration * attackChargeTimer;
-
-            attackMove = new Vector2(horizontal, vertical);
             //GetComponent<SpriteRenderer>().sprite = attackImage;
             isAttacking = true;
         }
