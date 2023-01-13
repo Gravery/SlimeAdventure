@@ -4,9 +4,11 @@ using UnityEngine.UI;
 public class Life : MonoBehaviour
 {
     [SerializeField] private int health;
+    [SerializeField] private int maxHealth;
     [SerializeField] private IntSO healthSO;
 
-    private void Start() {
+    private void Awake() {
+        maxHealth = 10;
         health = healthSO.Value;
         //Debug.Log(health);
     }
@@ -26,8 +28,12 @@ public class Life : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public int getHealth(){
+    public int GetHealth(){
         return health;
+    }
+
+    public int GetMaxHealth(){
+        return maxHealth;
     }
 
 

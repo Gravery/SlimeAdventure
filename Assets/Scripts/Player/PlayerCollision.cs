@@ -12,6 +12,7 @@ public class PlayerCollision : MonoBehaviour
     private bool isTakingDamage;
     private float damageTimer;
     Vector2 direction;
+    public HealthBar drawlife;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class PlayerCollision : MonoBehaviour
             if (!basicAttack.IsAttacking()){
                 direction = collision.GetContact(0).normal;
                 life.TakeDamage(damageTaken);
+                drawlife.DrawHearts();
                 GetComponent<PlayerDash>().Reset();
                 isTakingDamage = true;
                 return;
@@ -51,6 +53,7 @@ public class PlayerCollision : MonoBehaviour
             else{
                 direction = collision.GetContact(0).normal;
                 life.TakeDamage(damageTaken);
+                drawlife.DrawHearts();
                 GetComponent<PlayerAttack>().Reset();
                 isTakingDamage = true;
                 return;
