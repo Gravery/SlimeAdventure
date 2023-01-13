@@ -22,6 +22,7 @@ public class CameraMove : MonoBehaviour
         targetX = Camera.transform.position.x + x;
         targetY = Camera.transform.position.y + y;
         Camera.transform.position = new Vector3(targetX, targetY, Camera.transform.position.z);
+        transform.position -= new Vector3(x/10, y/10, transform.position.z);
         x = -x;
         y = -y;
     

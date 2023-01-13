@@ -51,21 +51,21 @@ public class PlayerSkills : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         if(Input.GetKeyDown("x") && !isUsingSkill){
             skillCount++;
             if(skillCount==3)
                 skillCount=0;
         }
+    
+            if(skillCount==0 && unlockFireball)
+                Fireball();
+            
+            if(skillCount==1 && unlockIce)
+                Ice();
 
-        if(skillCount==0 && unlockFireball)
-            Fireball();
-        
-        if(skillCount==1 && unlockIce)
-            Ice();
-
-        if(skillCount==2 && unlockPlant)
-            Plant();
+            if(skillCount==2 && unlockPlant)
+                Plant();
 
     }
     
