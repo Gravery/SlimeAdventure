@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4379132168851126082}
   - component: {fileID: 4295631592312408354}
   - component: {fileID: 1981993203414298884}
-  - component: {fileID: 495965901493616822}
+  - component: {fileID: 2742903333940707479}
   m_Layer: 0
   m_Name: fireball
   m_TagString: Fireball
@@ -29,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8677379630315866061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.0058643, z: 2.0249677}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: -0.6295, y: 0.6332, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,9 +113,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0027210712, y: 0}
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.7587645
 --- !u!50 &1981993203414298884
 Rigidbody2D:
   serializedVersion: 4
@@ -137,19 +137,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!111 &495965901493616822
-Animation:
+--- !u!95 &2742903333940707479
+Animator:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8677379630315866061}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: eee244d0ddc5cde41b377b2bcb96c19f, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: eee244d0ddc5cde41b377b2bcb96c19f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 224fd6ad2cc6a794ea19fab6d0ed187b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

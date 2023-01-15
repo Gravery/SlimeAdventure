@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     Rigidbody2D rb;
-    private float lifeTime = 1f;
+    private float lifeTime = 2f;
     void Update()
     {
         gameObject.GetComponent<Rigidbody2D>().velocity = transform.right * 15;
