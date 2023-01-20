@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 3addd50ed99648b448ce43b95cf0cd99
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Scene Joice.unity
     guid: 8674e86535a40c349ab4cf22a6e4a7c2
   - enabled: 0
@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/B.unity
     guid: d04baf94d5a472549b33f07b1f7c271b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Kenzo_TestScene.unity
     guid: c74431cca2ebbe546a35103156dda453
   m_configObjects: {}
