@@ -16,6 +16,9 @@ public class PlayerAttack : MonoBehaviour
     float horizontal;
     float vertical;
     public cooldownFireball charging;
+    
+    private bool chargingAttack;
+    private PlayerSkills skill;
 
 
     // Start is called before the first frame update
@@ -28,6 +31,8 @@ public class PlayerAttack : MonoBehaviour
         charging.SetLoading(attackChargeTimer);
         charging.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+
+        skill = GetComponent<PlayerSkills>(); 
     }
 
     // Update is called once per frame
@@ -42,9 +47,13 @@ public class PlayerAttack : MonoBehaviour
             attackMove = new Vector2(horizontal, vertical);
         }
 
-        if (Input.GetKey(chargeAttack)){
+        if (Input.GetKey(chargeAttack) && !skill.IsUsingSkill()){
             attackChargeTimer += Time.deltaTime;
             charging.SetLoading(attackChargeTimer);
+            chargingAttack = true;
+        }
+        else{
+            chargingAttack = false;
         }
 
         if ((Input.GetKeyUp(chargeAttack)) && (attackChargeTimer >= 0.3) && (isAttacking == false)){
@@ -91,12 +100,17 @@ public class PlayerAttack : MonoBehaviour
         attackChargeTimer = 0;
         attackDuration = 0.5f;
         isAttacking = false;
+        Debug.Log("Pode skill");
         charging.SetLoading(0f);
         charging.gameObject.SetActive(false);
     }
 
     public bool IsAttacking(){
         return isAttacking;
+    }
+
+    public bool ChargingAttack(){
+        return chargingAttack;
     }
 
     public void CollidedEnemy(){

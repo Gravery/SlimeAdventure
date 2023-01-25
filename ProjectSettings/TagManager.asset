@@ -49,17 +49,20 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
-  - name: "Objeto de cen\xE1rio"
-    uniqueID: 3549419353
+  - name: "Ch\xE3o"
+    uniqueID: 2651517611
     locked: 0
   - name: SkillsPlayer
     uniqueID: 1433737687
     locked: 0
   - name: Player
     uniqueID: 538116995
+    locked: 0
+  - name: "Objeto de cen\xE1rio"
+    uniqueID: 3549419353
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Particulas
     uniqueID: 3206362271

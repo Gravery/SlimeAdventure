@@ -1146,8 +1146,8 @@ TextureImporter:
         y: 4032
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1167,8 +1167,8 @@ TextureImporter:
         y: 4032
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1188,8 +1188,8 @@ TextureImporter:
         y: 4032
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -19509,8 +19509,8 @@ TextureImporter:
       '[Base]BaseChip_pipo_504': 257038947
       '[Base]BaseChip_pipo_651': -1302777178
       '[Base]BaseChip_pipo_58': 2069847271
-      '[Base]BaseChip_pipo_184': 1585117325
       '[Base]BaseChip_pipo_625': 92818341
+      '[Base]BaseChip_pipo_184': 1585117325
       '[Base]BaseChip_pipo_234': 1811465009
       '[Base]BaseChip_pipo_461': -1341469791
       '[Base]BaseChip_pipo_819': 1956659914
