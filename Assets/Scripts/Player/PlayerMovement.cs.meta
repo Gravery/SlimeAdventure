@@ -3,7 +3,9 @@ guid: 0310f536cd175204db52e945739f9c0c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - standardSlime: {fileID: 21300000, guid: c10df2c51260cfd458e2a4402fd249c2, type: 3}
+  - upSlime: {fileID: 21300000, guid: 28c7e69a9faa3744486d7db3a1172b0a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,23 +13,41 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private DetectPlayerAction detect;
     public float debuff;
+    private Animator animator;
+    public bool isMoving;
+    public LayerMask interactableLayer;
+    float horizontal, vertical;
+
+    [SerializeField] GameObject dialogBox;
+    bool interacting;
     
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        isMoving = false;
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         detect = GetComponent<DetectPlayerAction>();
         debuff = 0f;
+        horizontal = 0;
+        vertical = 0;
+        interacting = false;
     }
 
     private void Update()
     {
-        //float deltaTime = Time.deltaTime;
-        float horizontal = Input.GetAxisRaw("Horizontal");  //* deltaTime;
-        float vertical = Input.GetAxisRaw("Vertical");  //* deltaTime;
+        horizontal = Input.GetAxisRaw("Horizontal");  
+        vertical = Input.GetAxisRaw("Vertical");
         move = new Vector2(horizontal, vertical);
         
+        if(horizontal == 0 && vertical == 0 && (isMoving || !detect.IsInAction())) StopMovement();
+        if(horizontal != 0 || vertical != 0 && !isMoving) isMoving = true;
+
+        if(interacting == true)
+            CheckInteraction();
+
+
         Flip(horizontal);
 
         if (vertical > 0){
@@ -38,16 +59,35 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z)))){
+        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z))) && isMoving){
             if (horizontal != 0 && vertical != 0){
+                animator.SetFloat("moveX", horizontal);
+                animator.SetFloat("moveY", vertical);
                 rb.velocity = move * (speed / 1.4f) * ((100-debuff)/100);
             }
             else{
+                animator.SetFloat("moveX", horizontal);
+                animator.SetFloat("moveY", vertical);
                 rb.velocity = move * speed * ((100-debuff)/100);
             }
         }
         if ((!detect.IsInAction() && (Input.GetKey(KeyCode.Space))) || (Input.GetKey(KeyCode.Z)) ){
             StopMovement();
+        }
+        if ((!detect.IsInAction()) && (Input.GetKeyDown(KeyCode.C)) && !interacting){
+            interacting = true;
+            Interact();
+        }
+        animator.SetBool("isMoving", isMoving);
+    }
+
+    void Interact(){
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+
+        var collider = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
+        if (collider != null){
+            collider.GetComponent<Interactable>()?.Interact();
         }
     }
 
@@ -63,7 +103,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopMovement(){
         rb.velocity = move * 0;
+        isMoving = false;
+        animator.SetBool("isMoving", isMoving);
     }
 
+    public void CheckInteraction(){
+        if(dialogBox.activeSelf == false){
+            interacting = false;
+        }
+    }
     
 }
