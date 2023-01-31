@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 6472696382894936065}
   - component: {fileID: 6472696382894936064}
   - component: {fileID: 6472696382894936079}
-  - component: {fileID: 6472696382894936078}
-  - component: {fileID: 6472696382894936070}
   - component: {fileID: 6915648874258679174}
   - component: {fileID: 7392751859086769728}
   - component: {fileID: 6472696382894937081}
@@ -43,7 +41,7 @@ Transform:
   - {fileID: 6472696384427075307}
   - {fileID: 7099372094368671096}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6472696382894936068
 SpriteRenderer:
@@ -147,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  maxHealth: 0
   healthSO: {fileID: 11400000, guid: 82f5dc22045eabe46984ddffcb3a84ae, type: 2}
 --- !u!114 &6472696382894936064
 MonoBehaviour:
@@ -161,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTaken: 1
+  drawlife: {fileID: 0}
 --- !u!114 &6472696382894936079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,32 +176,7 @@ MonoBehaviour:
   speed: 5
   standardSlime: {fileID: 21300000, guid: 4eadc31fe6543c64ca9e0b47ae8d60d7, type: 3}
   upSlime: {fileID: 21300000, guid: 912010749d3fc364bbe5823efae69766, type: 3}
---- !u!114 &6472696382894936078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6472696382894936077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9053913985256b943943f4c90a155aa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetxt: {fileID: 0}
---- !u!114 &6472696382894936070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6472696382894936077}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002d1cb6e7754fb468cb1dd93033c2c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainCamera: {fileID: 0}
+  debuff: 0
 --- !u!114 &6915648874258679174
 MonoBehaviour:
   m_ObjectHideFlags: 0
