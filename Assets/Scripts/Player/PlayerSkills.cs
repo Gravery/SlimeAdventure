@@ -11,7 +11,8 @@ public class PlayerSkills : MonoBehaviour
     public bool unlockPlant;
     private Quaternion skillDirection;
     private bool isUsingSkill; 
-    private int skillCount; // PARA USO NOS TESTES
+    private PlayerAttack basicAttack;
+    private int skillCount;
 
     // VARIÁVEIS PARA FIREBALL
     public GameObject goFireball;
@@ -40,6 +41,9 @@ public class PlayerSkills : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        basicAttack = GetComponent<PlayerAttack>();
+
+
         skillDirection.eulerAngles = new Vector3(0,0,0);
         cf.SetMaxTime(maxLoadFireball);
         cf.SetLoading(0f);
@@ -57,16 +61,17 @@ public class PlayerSkills : MonoBehaviour
             if(skillCount==3)
                 skillCount=0;
         }
-    
+
+        if(!basicAttack.ChargingAttack() && !basicAttack.IsAttacking()){
             if(skillCount==0 && unlockFireball)
-                Fireball();
+            Fireball();
             
             if(skillCount==1 && unlockIce)
                 Ice();
 
             if(skillCount==2 && unlockPlant)
                 Plant();
-
+        }
     }
     
     void Fireball()
@@ -275,4 +280,6 @@ public class PlayerSkills : MonoBehaviour
     public bool IsUsingSkill(){
         return isUsingSkill;
     }
+
+    
 }
