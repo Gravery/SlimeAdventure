@@ -19,7 +19,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Interactable
@@ -54,12 +54,6 @@ TagManager:
     locked: 0
   - name: SkillsPlayer
     uniqueID: 1433737687
-    locked: 0
-  - name: Player
-    uniqueID: 538116995
-    locked: 0
-  - name: "Objeto de cen\xE1rio"
-    uniqueID: 3549419353
     locked: 0
   - name: Default
     uniqueID: 0
