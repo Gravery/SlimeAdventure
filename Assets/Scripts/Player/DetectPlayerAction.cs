@@ -23,6 +23,6 @@ public class DetectPlayerAction : MonoBehaviour
 
     public bool IsInAction(){
         return ((dash.IsDashing()) || (basicAttack.IsAttacking()) || (collision.IsTakingDamage()) ||
-                (skill.IsUsingSkill()));
+                (skill.IsUsingSkill()) || (basicAttack.ChargingAttack()));
     }
 }

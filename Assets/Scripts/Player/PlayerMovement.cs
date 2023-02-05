@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 move;
     private SpriteRenderer sprite;
     private DetectPlayerAction detect;
+    private PlayerAttack playerAttack;
     public float debuff;
     private Animator animator;
     public bool isMoving;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         detect = GetComponent<DetectPlayerAction>();
+        playerAttack = GetComponent<PlayerAttack>();
         debuff = 0f;
         horizontal = 0;
         vertical = 0;
@@ -71,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = move * speed * ((100-debuff)/100);
             }
         }
-        if ((!detect.IsInAction() && (Input.GetKey(KeyCode.Space))) || (Input.GetKey(KeyCode.Z)) ){
+        if (detect.IsInAction() && !playerAttack.IsAttacking()){
             StopMovement();
         }
         if ((!detect.IsInAction()) && (Input.GetKeyDown(KeyCode.C)) && !interacting){

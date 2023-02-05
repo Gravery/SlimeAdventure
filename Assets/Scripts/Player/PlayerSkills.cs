@@ -64,7 +64,7 @@ public class PlayerSkills : MonoBehaviour
 
         if(!basicAttack.ChargingAttack() && !basicAttack.IsAttacking()){
             if(skillCount==0 && unlockFireball)
-            Fireball();
+                Fireball();
             
             if(skillCount==1 && unlockIce)
                 Ice();
