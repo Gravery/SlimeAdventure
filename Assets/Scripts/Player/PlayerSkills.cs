@@ -6,13 +6,14 @@ using UnityEngine.Tilemaps;
 public class PlayerSkills : MonoBehaviour
 {
     // Variaveis gerais
-    public bool unlockFireball;
-    public bool unlockIce;
-    public bool unlockPlant;
+    private bool unlockFireball;
+    private bool unlockIce;
+    private bool unlockPlant;
     private Quaternion skillDirection;
     private bool isUsingSkill; 
     private PlayerAttack basicAttack;
     private int skillCount;
+    public PlayerInfo pi;
 
     // VARIÁVEIS PARA FIREBALL
     public GameObject goFireball;
@@ -43,14 +44,18 @@ public class PlayerSkills : MonoBehaviour
     {
         basicAttack = GetComponent<PlayerAttack>();
 
-
         skillDirection.eulerAngles = new Vector3(0,0,0);
         cf.SetMaxTime(maxLoadFireball);
         cf.SetLoading(0f);
+        cf.gameObject.SetActive(false);
 
         shooting = false;   
         isUsingSkill = false;
         skillCount = 0;
+
+        unlockFireball = pi.isFireballEnabled;
+        unlockIce = pi.isIceEnabled;
+        unlockPlant = pi.isVineEnabled;
     }
 
     // Update is called once per frame
@@ -281,5 +286,23 @@ public class PlayerSkills : MonoBehaviour
         return isUsingSkill;
     }
 
+    public void UnlockFireball(){
+        pi.isFireballEnabled = true;
+        unlockFireball = pi.isFireballEnabled;
+    }
+
+    public void UnlockIce(){
+        pi.isIceEnabled = true;
+        unlockIce = pi.isIceEnabled;
+    }
+
+    public void UnlockPlant(){
+        pi.isVineEnabled = true;
+        unlockPlant = pi.isVineEnabled;
+    }
+
+    public void UnlockJump(){
+        //
+    }
     
 }

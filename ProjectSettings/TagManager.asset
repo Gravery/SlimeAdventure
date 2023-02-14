@@ -58,6 +58,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: "Cen\xE1rio Acima"
+    uniqueID: 1610937587
+    locked: 0
   - name: Particulas
     uniqueID: 3206362271
+    locked: 0
+  - name: Limite Camera
+    uniqueID: 708035059
     locked: 0

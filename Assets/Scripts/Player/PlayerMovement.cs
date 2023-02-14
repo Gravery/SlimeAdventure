@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private DetectPlayerAction detect;
     private PlayerAttack playerAttack;
+    private PlayerDash playerDash;
     public float debuff;
     private Animator animator;
     public bool isMoving;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         detect = GetComponent<DetectPlayerAction>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerDash = GetComponent<PlayerDash>();
         debuff = 0f;
         horizontal = 0;
         vertical = 0;
@@ -73,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = move * speed * ((100-debuff)/100);
             }
         }
-        if (detect.IsInAction() && !playerAttack.IsAttacking()){
+        if(detect.IsInAction() && !playerAttack.IsAttacking() && !playerDash.IsDashing()){
             StopMovement();
         }
         if ((!detect.IsInAction()) && (Input.GetKeyDown(KeyCode.C)) && !interacting){

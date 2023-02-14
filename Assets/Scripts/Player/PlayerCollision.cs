@@ -8,6 +8,7 @@ public class PlayerCollision : MonoBehaviour
     private PlayerAttack basicAttack;
     private PlayerMovement pm;
     private PlayerDash dash;
+    private PlayerSkills ps;
     private Rigidbody2D rb;
     private bool isTakingDamage;
     private float damageTimer;
@@ -20,6 +21,7 @@ public class PlayerCollision : MonoBehaviour
         basicAttack = GetComponent<PlayerAttack>();
         pm = GetComponent<PlayerMovement>();
         dash = GetComponent<PlayerDash>();
+        ps = GetComponent<PlayerSkills>();
         rb = GetComponent<Rigidbody2D>();
         isTakingDamage = false;
         damageTimer = 0.15f;
@@ -60,20 +62,21 @@ public class PlayerCollision : MonoBehaviour
             }
             return;
         }
-
-        if (collision.gameObject.CompareTag("Wall")){
-            
+        else if (collision.gameObject.CompareTag("Wall")){
             if (basicAttack.IsAttacking()){
                 basicAttack.CollidedEnemy();
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        if (collision.gameObject.CompareTag("EnableDash")){
-            dash.EnableDash();
-        }
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("EnableDash")) {dash.EnableDash(); Destroy(other.gameObject);}
+        else if(other.gameObject.CompareTag("EnableFireball")){ ps.UnlockFireball(); Destroy(other.gameObject);}
+        else if(other.gameObject.CompareTag("EnableIce")){ ps.UnlockIce(); Destroy(other.gameObject);}
+        else if(other.gameObject.CompareTag("EnableVine")){ ps.UnlockPlant(); Destroy(other.gameObject);}
+        else if(other.gameObject.CompareTag("EnableJump")){ ps.UnlockJump(); Destroy(other.gameObject);}
     }
+
 
     private void HitMove(){
         rb.velocity = direction * 20f;

@@ -5,11 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-   public void PlayGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-   }
+     const string SCENE_NAME = "Área Inicial";
+     public StartingAreaSO sa;
 
-   public void QuitGame(){
-        Application.Quit();
-   }
+     public void PlayGame(){
+          StartNewGame();
+          SceneManager.LoadScene(SCENE_NAME);
+     }
+
+     public void QuitGame(){
+          Application.Quit();
+     }
+
+     private void StartNewGame(){
+          sa.newGame = true;
+     }
+     
 }

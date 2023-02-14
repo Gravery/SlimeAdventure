@@ -22,6 +22,15 @@ public class DetectPlayerAction : MonoBehaviour
     }
 
     public bool IsInAction(){
+        /*
+        if((dash.IsDashing())) Debug.Log("DASH");
+        if(basicAttack.IsAttacking()) Debug.Log("ATQ BASICO");
+        if(collision.IsTakingDamage()) Debug.Log("DANO");
+        if((skill.IsUsingSkill())) Debug.Log("Skill");
+        if((basicAttack.ChargingAttack())) Debug.Log("CHARGING ATTACK");
+        */
+
+
         return ((dash.IsDashing()) || (basicAttack.IsAttacking()) || (collision.IsTakingDamage()) ||
                 (skill.IsUsingSkill()) || (basicAttack.ChargingAttack()));
     }

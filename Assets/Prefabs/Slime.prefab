@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6472696382894936069}
   - component: {fileID: 6472696382894936068}
-  - component: {fileID: 6472696382894936067}
   - component: {fileID: 6472696382894936066}
   - component: {fileID: 6472696382894936065}
   - component: {fileID: 6472696382894936064}
@@ -95,22 +94,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6472696382894936067
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6472696382894936077}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.036605198, y: 0.12531438}
-  serializedVersion: 2
-  m_Radius: 1.0482628
 --- !u!50 &6472696382894936066
 Rigidbody2D:
   serializedVersion: 4
@@ -198,6 +181,7 @@ MonoBehaviour:
   startCooldown: 1.5
   dashStartTimer: 0.3
   onCooldown: 0
+  pi: {fileID: 11400000, guid: 8a3500330225a6943919a15cf9b6a700, type: 2}
 --- !u!114 &7392751859086769728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,9 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e7ba06fe991ea4aa8ad59cd832b2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockFireball: 1
-  unlockIce: 1
-  unlockPlant: 1
+  pi: {fileID: 11400000, guid: 8a3500330225a6943919a15cf9b6a700, type: 2}
   goFireball: {fileID: 8677379630315866061, guid: 01309ba3e2f9d14479c4abb26ae966bf, type: 3}
   playerTransform: {fileID: 6472696382894936069}
   maxLoadFireball: 1

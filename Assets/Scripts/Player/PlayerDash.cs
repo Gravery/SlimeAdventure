@@ -17,6 +17,7 @@ public class PlayerDash : MonoBehaviour
     public bool onCooldown;
     private bool isDashing;
     float horizontal, vertical;
+    public PlayerInfo pi;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class PlayerDash : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         detect = GetComponent<DetectPlayerAction>();
         cooldown = startCooldown;
-        isDashEnabled = true;
+        isDashEnabled = pi.isDashEnabled;
         isDashing = false;
         dashTimer = dashStartTimer;
     }
@@ -43,8 +44,8 @@ public class PlayerDash : MonoBehaviour
         if (!isDashEnabled) return;
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && !onCooldown && !detect.IsInAction()){
-        isDashing = true;
-        onCooldown = true;
+            isDashing = true;
+            onCooldown = true;
         }
 
 
@@ -66,7 +67,8 @@ public class PlayerDash : MonoBehaviour
     }
 
     public void EnableDash(){
-        isDashEnabled = true;
+        pi.isDashEnabled = true;
+        isDashEnabled = pi.isDashEnabled;
     }
 
     public bool IsDashing(){
@@ -74,6 +76,7 @@ public class PlayerDash : MonoBehaviour
     }    
 
     void DoDash(){
+
         if (horizontal != 0 && vertical != 0)
         {
             rb.velocity = dashVector * (dashSpeed /1.4f);
