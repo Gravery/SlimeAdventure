@@ -113,8 +113,8 @@ public class PlayerAttack : MonoBehaviour
         return chargingAttack;
     }
 
-    public void CollidedEnemy(){
-        attackMove = -attackMove;
+    public void CollidedEnemy(Vector2 normal){
+        attackMove = Vector2.Reflect(attackMove, normal);
         attackDuration += 0.2f;
     }
 

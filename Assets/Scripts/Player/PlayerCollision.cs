@@ -51,7 +51,10 @@ public class PlayerCollision : MonoBehaviour
                 return;
             }
             if (collision.gameObject.CompareTag("Enemy"))
-                basicAttack.CollidedEnemy();
+            {
+                Vector2 normal = collision.contacts[0].normal;
+                basicAttack.CollidedEnemy(normal);
+            }
             else{
                 direction = collision.GetContact(0).normal;
                 life.TakeDamage(damageTaken);
@@ -63,8 +66,10 @@ public class PlayerCollision : MonoBehaviour
             return;
         }
         else if (collision.gameObject.CompareTag("Wall")){
-            if (basicAttack.IsAttacking()){
-                basicAttack.CollidedEnemy();
+            if (basicAttack.IsAttacking())
+            {
+                Vector2 normal = collision.contacts[0].normal;
+                basicAttack.CollidedEnemy(normal);
             }
         }
     }
