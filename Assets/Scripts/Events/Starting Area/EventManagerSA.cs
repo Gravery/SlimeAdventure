@@ -25,6 +25,7 @@ public class EventManagerSA : MonoBehaviour
         // Se o jogador estiver iniciando um novo jogo
         if(sa.newGame){
             activeEvent = true;
+            player.transform.position = new Vector3(-0.49f,1.95f,0f); // Na casa do slime
             StartCoroutine(NewGameMovement());
         }
     }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: StartAreaSO
   m_EditorClassIdentifier: 
   newGame: 0
-  dashEnabled: 1
-  dashMissionStarted: 1
+  dashEnabled: 0
+  dashMissionStarted: 0

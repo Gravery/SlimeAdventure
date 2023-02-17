@@ -18,10 +18,10 @@ public class HealthBar : MonoBehaviour
     public void DrawHearts()
     {
         ClearHearts();
-        Debug.Log(playerLife.GetMaxHealth());
+        //Debug.Log(playerLife.GetMaxHealth());
         float maxHealthRemainder = playerLife.GetMaxHealth() % 2;
         int heartsToMake = (int)((playerLife.GetMaxHealth() / 2) + maxHealthRemainder);
-        Debug.Log(heartsToMake);
+        //Debug.Log(heartsToMake);
 
 
         for(int i = 0; i < heartsToMake; i++)
