@@ -80,7 +80,6 @@ public class PlayerCollision : MonoBehaviour
         else if(other.gameObject.CompareTag("EnableIce")){ ps.UnlockIce(); Destroy(other.gameObject);}
         else if(other.gameObject.CompareTag("EnableVine")){ ps.UnlockPlant(); Destroy(other.gameObject);}
         else if(other.gameObject.CompareTag("EnableJump")){ ps.UnlockJump(); Destroy(other.gameObject);}
-        else if(other.gameObject.CompareTag("ForestNPC")){ other.GetComponent<Interactable>()?.Interact();}
     }
 
 

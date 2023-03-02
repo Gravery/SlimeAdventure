@@ -32,7 +32,7 @@ public class EnterTheForest : MonoBehaviour
                 blocked = false;
                 pRigidbody.velocity = new Vector2(0,0);
                 // ESPAÇO PARA ATIVAR A INTERAÇÃO
-
+                NPC.GetComponent<Interactable>()?.Interact();
 
 
                 //
