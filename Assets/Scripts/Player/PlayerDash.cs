@@ -18,7 +18,7 @@ public class PlayerDash : MonoBehaviour
     private bool isDashing;
     float horizontal, vertical;
     public PlayerInfo pi;
-
+    public StartingAreaSO sa;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +68,7 @@ public class PlayerDash : MonoBehaviour
 
     public void EnableDash(){
         pi.isDashEnabled = true;
+        sa.dashEnabled = true;
         isDashEnabled = pi.isDashEnabled;
     }
 
