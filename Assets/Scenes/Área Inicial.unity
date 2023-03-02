@@ -641,6 +641,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1261116455938719880, guid: b7466058240ef1e4c99899791985bbca, type: 3}
   m_PrefabInstance: {fileID: 90127819}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &103657472 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1261116455938719880, guid: b7466058240ef1e4c99899791985bbca, type: 3}
+  m_PrefabInstance: {fileID: 1374567953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!213 &212422354
 Sprite:
   m_ObjectHideFlags: 0
@@ -1824,9 +1829,12 @@ Transform:
   - {fileID: 1001608585}
   - {fileID: 1105946476}
   - {fileID: 90127820}
-  - {fileID: 1867738077}
   - {fileID: 1623977876}
   - {fileID: 1274869118}
+  - {fileID: 103657472}
+  - {fileID: 1816412932}
+  - {fileID: 629023816}
+  - {fileID: 1492214608}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85246,7 +85254,7 @@ PrefabInstance:
     - target: {fileID: 6472696382894936079, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
       propertyPath: dialogBox
       value: 
-      objectReference: {fileID: 766841349558182639, guid: 3ac55c5cafc26e34981e5d13a1426171, type: 3}
+      objectReference: {fileID: 1426827817}
     - target: {fileID: 6472696382894936079, guid: c53dbf855ad1b9f499c66ff99295f708, type: 3}
       propertyPath: interactableLayer.m_Bits
       value: 64

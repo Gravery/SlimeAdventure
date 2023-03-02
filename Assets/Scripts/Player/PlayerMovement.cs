@@ -48,10 +48,6 @@ public class PlayerMovement : MonoBehaviour
         if(horizontal == 0 && vertical == 0 && (isMoving || !detect.IsInAction())) StopMovement();
         if(horizontal != 0 || vertical != 0 && !isMoving) isMoving = true;
 
-        if(interacting == true)
-            CheckInteraction();
-
-
         Flip(horizontal);
 
         if (vertical > 0){
@@ -63,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z))) && isMoving){
+        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z))) && isMoving && !interacting){
             if (horizontal != 0 && vertical != 0){
                 animator.SetFloat("moveX", horizontal);
                 animator.SetFloat("moveY", vertical);
@@ -83,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
             Interact();
         }
         animator.SetBool("isMoving", isMoving);
+        CheckInteraction();
+
     }
 
     void Interact(){
@@ -114,6 +112,9 @@ public class PlayerMovement : MonoBehaviour
     public void CheckInteraction(){
         if(dialogBox.activeSelf == false){
             interacting = false;
+        }
+        if(dialogBox.activeSelf == true && interacting == false){
+            interacting = true;
         }
     }
     
