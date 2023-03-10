@@ -52,14 +52,17 @@ public class EventManagerSA : MonoBehaviour
             }
         }
         else{
-            if(sa.dashEnabled){
+            if(sa.dashEnabled && !sa.wakeUp){
                 DisablePlayerMovements(true);
                 sf.Faint();
             }
             if(sa.wakeUp && !sa.slimeVillageDestroyed){
                 DestroyVillage();
+                DisablePlayerMovements(false);
             }
         }
+
+        
     }
 
     void DestroyVillage(){
