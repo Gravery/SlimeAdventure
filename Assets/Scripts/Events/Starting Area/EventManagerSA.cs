@@ -83,8 +83,9 @@ public class EventManagerSA : MonoBehaviour
         // Desativa toda colisão do player e todos os controles
         // e movimenta ele um pouco para frente
         DisablePlayerMovements(true);
-        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -0.5f);
-        yield return new WaitForSeconds(2f);
+        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1f);
+        yield return new WaitForSeconds(1f);
+        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         DisablePlayerMovements(false);
         sa.newGame = false;
         activeEvent = false;

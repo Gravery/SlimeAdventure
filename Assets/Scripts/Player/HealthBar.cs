@@ -5,13 +5,17 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     public GameObject heartPrefab;
-    public Life playerLife;
+    private Life playerLife;
     List<HeartDisplay> hearts = new List<HeartDisplay>();
 
 
     void Start()
     {
-        DrawHearts();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player){
+            playerLife = player.GetComponent<Life>();
+            DrawHearts();
+        }
     }
 
 

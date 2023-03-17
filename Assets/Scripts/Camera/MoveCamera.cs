@@ -10,7 +10,7 @@ public class MoveCamera : MonoBehaviour
 
     void Start () {
         isPlayerHere = false;
-        Camera = GameObject.Find("Main Camera");
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     void OnTriggerEnter2D(Collider2D other) {

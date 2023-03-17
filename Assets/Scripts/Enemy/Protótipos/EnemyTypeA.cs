@@ -28,12 +28,14 @@ public class EnemyTypeA : MonoBehaviour
 
     private float xMax,yMax,xMin,yMin;
 
+    private EnemyLife life;
 
     // Start is called before the first frame update
     void Start()
     {
         origin = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        life = GetComponent<EnemyLife>();
         isMoving = false;
         isAttacking = false;
         transfPlayer = GameObject.FindGameObjectWithTag("Player").transform;
@@ -169,6 +171,8 @@ public class EnemyTypeA : MonoBehaviour
         xMin = -camWidth + spriteSize; // left bound
         xMax = camWidth - spriteSize; // right bound 
     }
+
+
 
 
 

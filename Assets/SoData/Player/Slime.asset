@@ -18,4 +18,4 @@ MonoBehaviour:
   isVineEnabled: 0
   isJumpEnabled: 0
   position: {x: 0, y: 0, z: 0}
-  life: 0
+  life: 9891

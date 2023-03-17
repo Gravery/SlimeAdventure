@@ -20,6 +20,9 @@ public class PlayerAttack : MonoBehaviour
     private bool chargingAttack;
     private PlayerSkills skill;
 
+    private Life pLife;
+    private TrailRenderer tr;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +34,9 @@ public class PlayerAttack : MonoBehaviour
         charging.SetLoading(attackChargeTimer);
         charging.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
-
+        pLife = GetComponent<Life>(); 
         skill = GetComponent<PlayerSkills>(); 
+        tr = GetComponent<TrailRenderer>(); 
     }
 
     // Update is called once per frame
@@ -73,8 +77,10 @@ public class PlayerAttack : MonoBehaviour
         if (isAttacking == true){
             Attack();
             Count();
+            tr.emitting = true;
             if (attackDuration <= 0){
                 Reset();
+                tr.emitting = false;
             } 
         }
 
@@ -100,7 +106,6 @@ public class PlayerAttack : MonoBehaviour
         attackChargeTimer = 0;
         attackDuration = 0.5f;
         isAttacking = false;
-        Debug.Log("Pode skill");
         charging.SetLoading(0f);
         charging.gameObject.SetActive(false);
     }
@@ -121,4 +126,6 @@ public class PlayerAttack : MonoBehaviour
     public int DamageDone(){
         return (int)(5*attackChargeTimer);
     }
+
+
 }
