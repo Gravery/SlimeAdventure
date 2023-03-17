@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
         move = new Vector2(horizontal, vertical);
         
-        if(horizontal == 0 && vertical == 0 && (isMoving || !detect.IsInAction())) StopMovement();
+        //if(horizontal == 0 && vertical == 0 && (isMoving || !detect.IsInAction())) StopMovement();
         if(horizontal != 0 || vertical != 0 && !isMoving) isMoving = true;
 
         Flip(horizontal);
@@ -110,6 +110,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void CheckInteraction(){
+        if(!dialogBox) return; 
+
         if(dialogBox.activeSelf == false){
             interacting = false;
         }
