@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour, Interactable
 {
-    [SerializeField] Dialog dialog;
+    [SerializeField] public Dialog dialog;
+    [SerializeField] public Dialog dialog1;
+    private int cont = 0;
 
     public void Interact(){
-            StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
+            if (cont == 0){
+                cont = 1;
+                StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
+            }
+            else{
+                StartCoroutine(DialogManager.Instance.ShowDialog(dialog1));
+            }
         }
+
+    public void SetInteraction(int x){
+        cont = x;
+    }
+    public int GetInteraction(){
+        return cont;
+    }
     
 }

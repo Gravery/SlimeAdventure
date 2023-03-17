@@ -13,10 +13,13 @@ public class EnterTheForest : MonoBehaviour
 
     private Vector3 toNPC = new Vector3(22.49f,-0.5f,0f);
     private GameObject NPC;
+    private GameObject NPC_old;
 
     private bool blocked = false;
     private float distance;
     private EventManagerSA em;
+
+    private bool executed = false;
 
     private void Start() {
         em = GetComponent<EventManagerSA>();
@@ -24,6 +27,18 @@ public class EnterTheForest : MonoBehaviour
 
     private void Update(){
         // Movimentando o player até o slime bloqueador de passagem
+        if(NPC_old.GetComponent<NPCController>().GetInteraction() == 1 && executed == false){
+            em.sa.dashMissionStarted = true;
+            executed = true;
+            NPC.GetComponent<NPCController>().SetInteraction(0);
+            NPC.GetComponent<NPCController>().dialog.lines = new List<string>() {
+                "O Chefe me avisou sobre você. Pode passar.", 
+                "Só tome cuidado. A floresta não é mais o que era, coisas estranhas têm acontecido…"};
+            NPC.GetComponent<NPCController>().dialog1.lines = new List<string>() {
+                "Outros slimes falaram sobre monstros do outro lado do rio, por isso fechamos o caminho.",
+                "Cuidado."};
+        }
+
         if(blocked){
             Vector3 movDirection = (toNPC - pTransf.position).normalized;
             pRigidbody.velocity = movDirection * 2f;
@@ -33,8 +48,6 @@ public class EnterTheForest : MonoBehaviour
                 pRigidbody.velocity = new Vector2(0,0);
                 // ESPAÇO PARA ATIVAR A INTERAÇÃO
                 NPC.GetComponent<Interactable>()?.Interact();
-
-
                 //
                 pBoxCollider.isTrigger = false;
                 pMov.enabled = true;
@@ -75,5 +88,6 @@ public class EnterTheForest : MonoBehaviour
     public void SetNPC(){
         // Pega o GameObject do NPC
         NPC = GameObject.FindWithTag("ForestNPC");
+        NPC_old = GameObject.FindWithTag("OldNPC");
     }
 }
