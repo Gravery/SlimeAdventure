@@ -5,11 +5,11 @@ using UnityEngine;
 [CreateAssetMenu]
 public class StartingAreaSO : ScriptableObject {
     public bool newGame;
-    public bool dashEnabled;
     public bool dashMissionStarted;
+    public bool dashEnabled;
     public bool wakeUp;
     public bool slimeVillageDestroyed;
-
+    public bool talkWithOldSlime;
 
 }
 

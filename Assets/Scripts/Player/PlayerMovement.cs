@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");  
         vertical = Input.GetAxisRaw("Vertical");
         move = new Vector2(horizontal, vertical);
-        
+        CheckInteraction();
         //if(horizontal == 0 && vertical == 0 && (isMoving || !detect.IsInAction())) StopMovement();
         if(horizontal != 0 || vertical != 0 && !isMoving) isMoving = true;
 
@@ -79,8 +79,6 @@ public class PlayerMovement : MonoBehaviour
             Interact();
         }
         animator.SetBool("isMoving", isMoving);
-        CheckInteraction();
-
     }
 
     void Interact(){
