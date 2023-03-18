@@ -10,6 +10,7 @@ public class StartingAreaSO : ScriptableObject {
     public bool wakeUp;
     public bool slimeVillageDestroyed;
     public bool talkWithOldSlime;
+    
 
 }
 

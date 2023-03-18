@@ -61,7 +61,7 @@ public class SlimeFainting : MonoBehaviour
 
 
         // INTERAÇÃO
-        GameObject.FindWithTag("Desmaio").GetComponent<Interactable>()?.Interact();
+        //GameObject.FindWithTag("Desmaio").GetComponent<Interactable>()?.Interact();
         //
 
         canWakeUp = true;

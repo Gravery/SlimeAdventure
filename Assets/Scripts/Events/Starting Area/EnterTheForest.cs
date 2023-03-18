@@ -13,6 +13,8 @@ public class EnterTheForest : MonoBehaviour
 
     private Vector3 toNPC = new Vector3(22.49f,-0.5f,0f);
     private GameObject NPC;
+
+    [SerializeField]
     private GameObject NPC_old;
 
     private bool blocked = false;
@@ -22,12 +24,15 @@ public class EnterTheForest : MonoBehaviour
     private bool executed = false;
 
     private void Start() {
+        SetNPC();
         em = GetComponent<EventManagerSA>();
     }
 
     private void Update(){
         // Movimentando o player até o slime bloqueador de passagem
-        if(NPC_old.GetComponent<NPCController>().GetInteraction() == 1 && executed == false){
+        if(!NPC_old) return;
+
+        if(NPC_old.transform.GetChild(0).GetComponent<NPCController>().GetInteraction() == 1 && executed == false){
             em.sa.dashMissionStarted = true;
             executed = true;
             NPC.GetComponent<NPCController>().SetInteraction(0);

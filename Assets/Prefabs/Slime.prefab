@@ -490,7 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   maxHealth: 0
-  playerInfo: {fileID: 0}
+  playerInfo: {fileID: 11400000, guid: 8a3500330225a6943919a15cf9b6a700, type: 2}
 --- !u!114 &4896458911445189825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
   dashStartTimer: 0.3
   onCooldown: 0
   pi: {fileID: 11400000, guid: 8a3500330225a6943919a15cf9b6a700, type: 2}
-  sa: {fileID: 11400000, guid: c12c1a55a54c9e74e9835f068eefac33, type: 2}
+  sa: {fileID: 11400000, guid: 3b40aedf92caeec4f80298bccc4f4fb0, type: 2}
 --- !u!114 &8987004366865934977
 MonoBehaviour:
   m_ObjectHideFlags: 0

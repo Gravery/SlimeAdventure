@@ -13,15 +13,7 @@ MonoBehaviour:
   m_Name: StartAreaSO
   m_EditorClassIdentifier: 
   newGame: 0
-<<<<<<< Updated upstream
   dashEnabled: 1
   dashMissionStarted: 1
   wakeUp: 1
   slimeVillageDestroyed: 1
-=======
-  dashMissionStarted: 1
-  dashEnabled: 0
-  wakeUp: 0
-  slimeVillageDestroyed: 0
-  talkWithOldSlime: 0
->>>>>>> Stashed changes

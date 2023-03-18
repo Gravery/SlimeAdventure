@@ -46,7 +46,6 @@ public class EventManagerSA : MonoBehaviour
         if(!sa.dashMissionStarted){
             if(player.transform.position.x >= 24.5 && !activeEvent){
                 etf.SetPlayer(player);
-                etf.SetNPC();
                 StartCoroutine(etf.PathBlocked());
                 activeEvent = true;
             }
@@ -58,7 +57,13 @@ public class EventManagerSA : MonoBehaviour
             }
             if(sa.wakeUp && !sa.slimeVillageDestroyed){
                 DestroyVillage();
+                GameObject.FindWithTag("OldNPC")?.transform.GetChild(0).gameObject.SetActive(false);
+                GameObject.FindWithTag("OldNPC")?.transform.GetChild(1).gameObject.SetActive(true);
                 DisablePlayerMovements(false);
+            }
+
+            if(GameObject.FindWithTag("OldNPC")?.transform.GetChild(1).GetComponent<NPCController>().GetInteraction() == 1){
+                sa.talkWithOldSlime = true;
             }
         }
 
