@@ -53,6 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKey(chargeAttack) && !skill.IsUsingSkill()){
             attackChargeTimer += Time.deltaTime;
+            rb.velocity = new Vector2(0,0);
             charging.SetLoading(attackChargeTimer);
             chargingAttack = true;
         }

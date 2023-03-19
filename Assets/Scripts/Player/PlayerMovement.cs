@@ -6,116 +6,71 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 6f;
-    public Sprite standardSlime;
-    public Sprite upSlime;
     private Rigidbody2D rb;
     private Vector2 move;
-    private SpriteRenderer sprite;
     private DetectPlayerAction detect;
-    private PlayerAttack playerAttack;
-    private PlayerDash playerDash;
     public float debuff;
-    private Animator animator;
-    public bool isMoving;
-    public LayerMask interactableLayer;
     float horizontal, vertical;
 
-    [SerializeField] GameObject dialogBox;
-    bool interacting;
-    
+    private Animator animator;
+    private const string WALK_UP = "walk_up";
+    private const string WALK_DOWN = "walk_down";
+    private const string IDLE = "idle";
+    private string currentState;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        isMoving = false;
         rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
         detect = GetComponent<DetectPlayerAction>();
-        playerAttack = GetComponent<PlayerAttack>();
-        playerDash = GetComponent<PlayerDash>();
-        debuff = 0f;
-        horizontal = 0;
-        vertical = 0;
-        interacting = false;
     }
 
     private void Update()
     {
+        if(detect.IsInAction()) return;
+           
         horizontal = Input.GetAxisRaw("Horizontal");  
         vertical = Input.GetAxisRaw("Vertical");
         move = new Vector2(horizontal, vertical);
-        CheckInteraction();
-        //if(horizontal == 0 && vertical == 0 && (isMoving || !detect.IsInAction())) StopMovement();
-        if(horizontal != 0 || vertical != 0 && !isMoving) isMoving = true;
 
-        Flip(horizontal);
+        Animation(move);
 
-        if (vertical > 0){
-            GetComponent<SpriteRenderer>().sprite = upSlime;
-        }
-        else{
-            if ((vertical < 0) || (horizontal != 0)){
-            GetComponent<SpriteRenderer>().sprite = standardSlime;
-            }
-        }
-
-        if ((!detect.IsInAction()) && (!Input.GetKey(KeyCode.Space) && (!Input.GetKey(KeyCode.Z))) && isMoving && !interacting){
-            if (horizontal != 0 && vertical != 0){
-                animator.SetFloat("moveX", horizontal);
-                animator.SetFloat("moveY", vertical);
-                rb.velocity = move * (speed / 1.4f) * ((100-debuff)/100);
-            }
-            else{
-                animator.SetFloat("moveX", horizontal);
-                animator.SetFloat("moveY", vertical);
-                rb.velocity = move * speed * ((100-debuff)/100);
-            }
-        }
-        if(detect.IsInAction() && !playerAttack.IsAttacking() && !playerDash.IsDashing()){
-            StopMovement();
-        }
-        if ((!detect.IsInAction()) && (Input.GetKeyDown(KeyCode.C)) && !interacting){
-            interacting = true;
-            Interact();
-        }
-        animator.SetBool("isMoving", isMoving);
+        move.Normalize();
+        rb.velocity = move * speed * (100-debuff)/100;
     }
 
-    void Interact(){
-        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-        var interactPos = transform.position + facingDir;
 
-        var collider = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
-        if (collider != null){
-            collider.GetComponent<Interactable>()?.Interact();
-        }
-    }
-
-    void Flip(float horizontal)
+    void Animation(Vector2 d)
     {
-        if (horizontal  > 0){
-            sprite.flipX = false;
+
+        if(d == new Vector2(0,0)){
+            ChangeAnimationState(IDLE);
+            //gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
         }
-        else if (horizontal < 0){
-            sprite.flipX = true;
+        else if(d.x > -1 && d.y<=0){
+            ChangeAnimationState(WALK_DOWN);
+            gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        }
+        else if(d.x == -1 && d.y <= 0){
+            ChangeAnimationState(WALK_DOWN);
+            gameObject.transform.localScale = new Vector3(-0.5f, 0.5f, 1);
+        }
+        else if(d.x > -1 && d.y>0){
+            ChangeAnimationState(WALK_UP);
+            gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        }
+        else if(d.x == -1 && d.y > 0){
+            ChangeAnimationState(WALK_UP);
+            gameObject.transform.localScale = new Vector3(-0.5f, 0.5f, 1);
         }
     }
 
-    public void StopMovement(){
-        rb.velocity = move * 0;
-        isMoving = false;
-        animator.SetBool("isMoving", isMoving);
-    }
 
-    public void CheckInteraction(){
-        if(!dialogBox) return; 
+    void ChangeAnimationState(string newState)
+    {
+        if(newState == currentState) return;
 
-        if(dialogBox.activeSelf == false){
-            interacting = false;
-        }
-        if(dialogBox.activeSelf == true && interacting == false){
-            interacting = true;
-        }
+        animator.Play(newState);
+        currentState = newState;
     }
-    
 }

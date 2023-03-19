@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 1882527178161881788}
   - component: {fileID: 1882527178161881763}
   - component: {fileID: -4445037288268720394}
+  - component: {fileID: 6717663762702216315}
   m_Layer: 3
   m_Name: Slime
   m_TagString: Player
@@ -749,6 +750,23 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &6717663762702216315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896458911445189836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78aa37e306538844a7c66849039b7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogBox: {fileID: 0}
+  isInteracting: 0
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8693668225636587929
 GameObject:
   m_ObjectHideFlags: 0

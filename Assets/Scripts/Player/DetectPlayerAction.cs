@@ -9,6 +9,7 @@ public class DetectPlayerAction : MonoBehaviour
     private PlayerCollision collision;
 
     private PlayerSkills skill;
+    private Interact interaction;
 
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class DetectPlayerAction : MonoBehaviour
         collision = GetComponent<PlayerCollision>();
 
         skill = GetComponent<PlayerSkills>();
+        interaction = GetComponent<Interact>();
     }
 
     public bool IsInAction(){
@@ -28,10 +30,12 @@ public class DetectPlayerAction : MonoBehaviour
         if(collision.IsTakingDamage()) Debug.Log("DANO");
         if((skill.IsUsingSkill())) Debug.Log("Skill");
         if((basicAttack.ChargingAttack())) Debug.Log("CHARGING ATTACK");
+        if((interaction.isInteracting())) Debug.Log("INTERACTION");
         */
 
 
         return ((dash.IsDashing()) || (basicAttack.IsAttacking()) || (collision.IsTakingDamage()) ||
-                (skill.IsUsingSkill()) || (basicAttack.ChargingAttack()));
+                (skill.IsUsingSkill()) || (basicAttack.ChargingAttack()) || (interaction.IsInteracting()) ||
+                (basicAttack.ChargingAttack()));
     }
 }
