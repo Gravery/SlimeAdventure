@@ -8,6 +8,7 @@ public class Interact : MonoBehaviour
     public bool isInteracting;
     private DetectPlayerAction detect;
     public LayerMask interactableLayer;
+    private bool canInteract = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,13 @@ public class Interact : MonoBehaviour
     void Update(){
         CheckInteraction();
 
+        
         if ((!detect.IsInAction()) && (Input.GetKeyDown(KeyCode.C))){
+            if(!canInteract){
+                canInteract = true;
+                return;
+            }
+
             isInteracting = true;
             Interaction();
         }
@@ -38,6 +45,7 @@ public class Interact : MonoBehaviour
             isInteracting = false;
         }
         if(dialogBox.activeSelf == true && isInteracting == false){
+            canInteract = false;
             isInteracting = true;
         }
     }

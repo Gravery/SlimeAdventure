@@ -7,17 +7,39 @@ public class Spawner : MonoBehaviour
     /*
     Função Spawn de inimigos quando o player chega no quadrante
     */
-    public List<GameObject> enemies;
+    public List<GameObject> enemiesToSpawn;
+    public List<GameObject> enemiesSpawned;
 
     [SerializeField]
     private DetectPlayerPosition quad;
 
+    bool spawn = false;
+
     private void Update() {
-        if(quad.IsHere()){
-            for(int i=0; i<enemies.Count ; i++){
-                Instantiate(enemies[0],transform.position, Quaternion.identity);
-                enemies.Remove(enemies[0]);
-            }
+        if(!quad) return;
+
+        if(quad.IsHere()) Spawn();
+        else Despawn();
+    }
+
+    void Spawn(){
+        if(spawn) return;
+        spawn = true;
+
+        for(int i=0; i<enemiesToSpawn.Count ; i++){
+            GameObject clone = Instantiate(enemiesToSpawn[i],transform.position, Quaternion.identity);
+            enemiesSpawned.Add(clone);
+        }
+
+    }
+
+    void Despawn(){
+        if(!spawn) return;
+        spawn = false;
+        
+        for(int i=0; i<enemiesSpawned.Count ; i++){
+            Destroy(enemiesSpawned[0].gameObject);
+            enemiesSpawned.Remove(enemiesSpawned[0]);
         }
     }
 }

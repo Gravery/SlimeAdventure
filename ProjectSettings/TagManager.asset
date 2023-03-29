@@ -15,6 +15,14 @@ TagManager:
   - MaterialText
   - MaterialRadioButton
   - IceSkill
+  - EnableFireball
+  - EnableIce
+  - EnableVine
+  - EnableJump
+  - OldNPC
+  - ForestNPC
+  - SlimeVillage
+  - Dialog Box
   layers:
   - Default
   - TransparentFX
@@ -52,14 +60,14 @@ TagManager:
   - name: "Ch\xE3o"
     uniqueID: 2651517611
     locked: 0
+  - name: "Cen\xE1rio Acima"
+    uniqueID: 1610937587
+    locked: 0
   - name: SkillsPlayer
     uniqueID: 1433737687
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: "Cen\xE1rio Acima"
-    uniqueID: 1610937587
     locked: 0
   - name: Particulas
     uniqueID: 3206362271

@@ -17,30 +17,33 @@ public class Sandstorm : MonoBehaviour
     [SerializeField]
     private List<Transform> positions;
 
-    [SerializeField]
-    private List<int> path;
     // Start is called before the first frame update
     private Image img;
 
-    private int rightPath;
-
-    private int previusQuad, currentQuad;
+   
+    private int previusQuad, currentQuad, antepenultQuad;
 
     private GameObject up, down, right, left;
+    private GameObject sandstormDirection;
+
+    private bool resolvingMaze;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         startFade = false; 
         endFade = false;
+        resolvingMaze = false; 
+
         
         img = filter.GetComponent<Image>();
-        rightPath = 0;
+
         
         up = filter.transform.GetChild(0).gameObject;
         down = filter.transform.GetChild(1).gameObject;
         right = filter.transform.GetChild(2).gameObject;
         left = filter.transform.GetChild(3).gameObject;
+        sandstormDirection = up;
     }
 
     // Update is called once per frame
@@ -60,10 +63,11 @@ public class Sandstorm : MonoBehaviour
             for(int i = 0; i<quadrants.Count; i++){
                 if( i>1 && quadrants[i].IsHere()){
                     if(!filter.activeSelf) filter.SetActive(true);
-                    currentQuad = i+1;
+                    currentQuad = i-1;
                     if(previusQuad != currentQuad) Maze(currentQuad);
                 }
                 else if(i<=1 && quadrants[i].IsHere()){
+                    if(i == 1 && previusQuad != 6){ player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
                     filter.SetActive(false);
                 }
             }
@@ -73,39 +77,62 @@ public class Sandstorm : MonoBehaviour
     void Maze(int quad){
         StartCoroutine(QuadTransition());
 
-        path.Add(quad);
-        if(path.Count == 6){
-            
-            if(rightPath == 6){
-                //teleporte player para o templo
-            }
-            else{
-                //teleporte player para o começo
-            }
-            
-            rightPath = 0;
-            return;
-        }
         
         if(quad == 1){
-            
+            if(resolvingMaze){
+                if(previusQuad == 4) player.transform.position = new Vector3(-22.4f, 14.8f,0);
+                else if(previusQuad == 2) player.transform.position = new Vector3(-13.31f, 22.21f,0);
+                else{ player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
+            }
+            else{
+                resolvingMaze = true;
+                if(sandstormDirection.activeSelf) sandstormDirection.SetActive(false);
+                sandstormDirection = up;
+                sandstormDirection.SetActive(true);
+            }
         }
         if(quad == 2){
+            if(previusQuad == 5) {player.transform.position = new Vector3(-8.63f,15.16f,0);}
+            else if(previusQuad == 1 && antepenultQuad !=4){ player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
 
+            if(sandstormDirection.activeSelf) sandstormDirection.SetActive(false);
+            sandstormDirection = left;
+            sandstormDirection.SetActive(true);
         }
         if(quad == 3){
+            if((previusQuad == 2 && antepenultQuad!=5)|| previusQuad == 6 ) { player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
+   
 
+            if(sandstormDirection.activeSelf) sandstormDirection.SetActive(false);
+            sandstormDirection = up;
+            sandstormDirection.SetActive(true);
         }
         if(quad == 4){
+            if(previusQuad == 1) {player.transform.position = new Vector3(2.37f,17.38f,0);}
+            else if(previusQuad != 5){ player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
 
+            if(sandstormDirection.activeSelf) sandstormDirection.SetActive(false);
+            sandstormDirection = down;
+            sandstormDirection.SetActive(true);
         }
         if(quad == 5){
+            if(previusQuad == 6) {player.transform.position = new Vector3(-35.43f,25.73f,0);}
+            else if(previusQuad != 1) { player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
 
+            if(sandstormDirection.activeSelf) sandstormDirection.SetActive(false);
+            sandstormDirection = down;
+            sandstormDirection.SetActive(true);
         }
         if(quad == 6){
+            if(previusQuad == 3) { player.transform.position =  new Vector3(-44.95f,29.66f,0); resolvingMaze = false;}
+            else if(previusQuad != 4) { player.transform.position =  new Vector3(-46.9f,3.56f,0); resolvingMaze = false;}
 
+            if(sandstormDirection.activeSelf) sandstormDirection.SetActive(false);
+            sandstormDirection = left;
+            sandstormDirection.SetActive(true);
         }
 
+        antepenultQuad = previusQuad;
         previusQuad = quad;
     }
 

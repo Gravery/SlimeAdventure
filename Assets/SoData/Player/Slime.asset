@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d604378a764e2af498c546b8628b86d1, type: 3}
   m_Name: Slime
   m_EditorClassIdentifier: 
-  isDashEnabled: 1
+  isDashEnabled: 0
   isFireballEnabled: 0
   isIceEnabled: 0
   isVineEnabled: 0

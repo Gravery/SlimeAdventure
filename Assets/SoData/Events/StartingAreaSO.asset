@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517e37c80752a9a4aa348b9c3e7f9ff7, type: 3}
   m_Name: StartingAreaSO
   m_EditorClassIdentifier: 
-  newGame: 1
-  dashMissionStarted: 0
-  dashEnabled: 0
-  wakeUp: 0
-  slimeVillageDestroyed: 0
-  talkWithOldSlime: 0
+  newGame: 0
+  dashMissionStarted: 1
+  dashEnabled: 1
+  wakeUp: 1
+  slimeVillageDestroyed: 1
+  talkWithOldSlime: 1

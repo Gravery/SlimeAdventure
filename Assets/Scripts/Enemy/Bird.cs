@@ -5,8 +5,8 @@ using UnityEngine;
 public class Bird : MonoBehaviour
 {
     private Transform player;
-    [SerializeField]
-    private GameObject effect;
+    //[SerializeField]
+    //private GameObject effect;
 
     private float rotateSpeed;
     private float speed=4f;

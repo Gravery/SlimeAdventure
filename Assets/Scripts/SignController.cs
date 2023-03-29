@@ -7,7 +7,7 @@ public class SignController : MonoBehaviour, Interactable
     [SerializeField] Dialog dialog;
 
     public void Interact(){
-            StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
-        }
+        StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
+    }
     
 }

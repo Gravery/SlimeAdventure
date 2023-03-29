@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 3addd50ed99648b448ce43b95cf0cd99
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene Joice.unity
     guid: 8674e86535a40c349ab4cf22a6e4a7c2
   - enabled: 0
@@ -20,13 +20,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/B.unity
     guid: d04baf94d5a472549b33f07b1f7c271b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Kenzo_TestScene.unity
     guid: c74431cca2ebbe546a35103156dda453
   - enabled: 1
+    path: "Assets/Scenes/\xC1rea Inicial.unity"
+    guid: b4bedddf02fdf9549940c66dcb6407ce
+  - enabled: 0
     path: Assets/Scenes/Deserto.unity
     guid: 0895872fc57dff54499242b359d54c2f
   - enabled: 1
-    path: "Assets/Scenes/\xC1rea Inicial.unity"
-    guid: b4bedddf02fdf9549940c66dcb6407ce
+    path: "Assets/Scenes/Deserto C\xF3pia.unity"
+    guid: 16791740efef2b2418690eb4ec66e6d9
   m_configObjects: {}

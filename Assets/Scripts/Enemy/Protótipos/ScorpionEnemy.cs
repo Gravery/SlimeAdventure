@@ -265,7 +265,7 @@ public class ScorpionEnemy : MonoBehaviour
             if(collision.gameObject.GetComponent<PlayerAttack>().IsAttacking()){
                 life.TakeDamage(collision.gameObject.GetComponent<PlayerAttack>().DamageDone());
                 Vector2 direction = new Vector2(transfPlayer.position.x - transform.position.x, transfPlayer.position.y - transform.position.y);
-                collision.gameObject.GetComponent<Life>().Knockback(direction);
+                collision.gameObject.GetComponent<Life>().Knockback(direction,15f);
             }
             else{
                 collision.gameObject.GetComponent<Life>().TakeDamage(1);

@@ -32,7 +32,8 @@ public class SandWhirlpool : MonoBehaviour
             pm = other.GetComponent<PlayerMovement>();
             pm.debuff = debuff;
 
-            Teleport(direction);
+            //Teleport(direction);
+            Damage(direction, other.GetComponent<Life>());
         }    
     }
 
@@ -47,6 +48,14 @@ public class SandWhirlpool : MonoBehaviour
         if(Math.Abs(distance.x)< 0.05 && Math.Abs(distance.y) < 0.05){
             if(load < maxLoadTeleport) load += Time.deltaTime;
             else SceneManager.LoadScene(undergroundScene);
+        }
+        else load = 0;
+    }
+
+    void Damage(Vector3 distance, Life player){
+        if(Math.Abs(distance.x)< 0.05 && Math.Abs(distance.y) < 0.05){
+            if(load < maxLoadTeleport) load += Time.deltaTime;
+            else {player.TakeDamage(1); load = 0; Debug.Log("Dano");}
         }
         else load = 0;
     }
