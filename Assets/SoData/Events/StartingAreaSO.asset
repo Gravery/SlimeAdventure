@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StartingAreaSO
   m_EditorClassIdentifier: 
   newGame: 0
-  dashMissionStarted: 1
-  dashEnabled: 1
-  wakeUp: 1
-  slimeVillageDestroyed: 1
-  talkWithOldSlime: 1
+  dashMissionStarted: 0
+  dashEnabled: 0
+  wakeUp: 0
+  slimeVillageDestroyed: 0
+  talkWithOldSlime: 0
